@@ -8,10 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Option;
+namespace Fresh\Fcm\Message\Parameters\Option;
 
 /**
- * Priority.
+ * Class Priority.
+ *
+ * Contains available values for the `priority` option.
  *
  * @see https://firebase.google.com/docs/cloud-messaging/http-server-ref#priority
  *

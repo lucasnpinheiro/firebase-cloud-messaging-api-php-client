@@ -8,17 +8,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Option;
+namespace Fresh\Fcm\Message\Parameters\Option;
 
 /**
- * Option.
+ * Class Options.
  *
- * List of options that can be used to change default behaviour of FCM notification.
+ * Set of options that can be used to change default behaviour of FCM notification.
  * @see https://firebase.google.com/docs/cloud-messaging/http-server-ref#collapse
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-final class Option implements OptionInterface
+final class Options implements OptionsInterface
 {
     /**
      * @var string $collapseKey Collapse key
@@ -43,7 +43,7 @@ final class Option implements OptionInterface
     /**
      * @var int $ttl Time to live
      */
-    private $ttl = self::DEFAULT_TTL_IN_SECONDS;
+    private $ttl = TTL::DEFAULT_IN_SECONDS;
 
     /**
      * @var string $restrictedPackageName Restricted package name.
@@ -56,9 +56,13 @@ final class Option implements OptionInterface
     private $dryRun = false;
 
     /**
-     * {@inheritdoc}
+     * Set value for `collapse_key` option.
+     *
+     * @param string $collapseKey Collapse key
+     *
+     * @return Options
      */
-    public function setCollapseKey(string $collapseKey): OptionInterface
+    public function setCollapseKey(string $collapseKey): Options
     {
         $this->collapseKey = $collapseKey;
 
@@ -74,9 +78,13 @@ final class Option implements OptionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set value for `priority` option.
+     *
+     * @param string $priority Priority
+     *
+     * @return Options
      */
-    public function setPriority(string $priority): OptionInterface
+    public function setPriority(string $priority): Options
     {
         $this->priority = $priority;
 
@@ -92,9 +100,13 @@ final class Option implements OptionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set value for `content_available` option.
+     *
+     * @param bool $contentAvailable Content available
+     *
+     * @return Options
      */
-    public function setContentAvailable(bool $contentAvailable): OptionInterface
+    public function setContentAvailable(bool $contentAvailable): Options
     {
         $this->contentAvailable = $contentAvailable;
 
@@ -110,9 +122,13 @@ final class Option implements OptionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set value for `delay_with_idle` option.
+     *
+     * @param bool $delayWithIdle Delay with idle
+     *
+     * @return Options
      */
-    public function setDelayWithIdle(bool $delayWithIdle): OptionInterface
+    public function setDelayWithIdle(bool $delayWithIdle): Options
     {
         $this->delayWithIdle = $delayWithIdle;
 
@@ -128,9 +144,13 @@ final class Option implements OptionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set value for `time_to_live` option.
+     *
+     * @param int $ttl Time to live
+     *
+     * @return Options
      */
-    public function setTTL(int $ttl): OptionInterface
+    public function setTTL(int $ttl): Options
     {
         $this->ttl = $ttl;
 
@@ -146,9 +166,13 @@ final class Option implements OptionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set value for `restricted_package_name` option.
+     *
+     * @param string $restrictedPackageName Restricted package name
+     *
+     * @return Options
      */
-    public function setRestrictedPackageName(string $restrictedPackageName): OptionInterface
+    public function setRestrictedPackageName(string $restrictedPackageName): Options
     {
         $this->restrictedPackageName = $restrictedPackageName;
 
@@ -164,9 +188,13 @@ final class Option implements OptionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set value for `dry_run` option.
+     *
+     * @param bool $dryRun Dry run
+     *
+     * @return Options
      */
-    public function setDryRun(bool $dryRun): OptionInterface
+    public function setDryRun(bool $dryRun): Options
     {
         $this->dryRun = $dryRun;
 
