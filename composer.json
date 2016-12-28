@@ -1,5 +1,5 @@
 {
-    "name": "fresh/fcm-api-client",
+    "name": "fresh/firebase-cloud-messaging-api-php-client",
     "description": "Firebase Cloud Messaging API Client.",
     "keywords": ["FCM", "firebase", "messaging", "firebase cloud messaging", "api client", "notification", "push-notification", "web-push", "android", "ios", "browser"],
     "homepage": "https://firebase.google.com/docs/cloud-messaging/",
@@ -14,14 +14,14 @@
     ],
     "support": {
         "email": "genvaldartem@gmail.com",
-        "issues": "https://github.com/fre5h/fcm-api-php-client/issues"
+        "issues": "https://github.com/fre5h/firebase-cloud-messaging-api-php-client/issues"
     },
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=5.6.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~5.5",
-        "squizlabs/php_codesniffer": "~2.6"
+        "phpunit/phpunit": "5.7.*",
+        "squizlabs/php_codesniffer": "~2.7"
     },
     "autoload": {
         "psr-4": {
