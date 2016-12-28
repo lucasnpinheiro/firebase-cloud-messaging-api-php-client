@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm;
+namespace Fresh\FirebaseCloudMessaging;
 
-use Fresh\Fcm\Message\Type\MessageInterface;
+use Fresh\FirebaseCloudMessaging\Message\Type\MessageInterface;
 //use GuzzleHttp\Client;
 //use GuzzleHttp\Exception\ClientException;
 //use GuzzleHttp\Exception\GuzzleException;
@@ -26,38 +26,28 @@ class Client
 {
     const DEFAULT_ENDPOINT = 'https://fcm.googleapis.com/fcm/send';
 
-    /**
-     * @var string $endpoint Endpoint
-     */
+    /** @var string */
     private $endpoint;
 
-    /**
-     * @var int $senderId Sender ID
-     */
+    /** @var int */
     private $senderId;
 
-    /**
-     * @var string $serverKey Server key
-     */
+    /** @var string */
     private $serverKey;
 
-    /**
-     * @var Client $guzzleHTTPClient Guzzle HTTP client
-     */
+    /** @var Client */
     private $guzzleHTTPClient;
 
     /**
-     * Constructor.
-     *
-     * @param int    $senderId  Sender Id
-     * @param string $serverKey Server key
-     * @param string $endpoint  Endpoint
+     * @param int    $senderId
+     * @param string $serverKey
+     * @param string $endpoint
      */
-    public function __construct(int $senderId, string $serverKey, string $endpoint = self::DEFAULT_ENDPOINT)
+    public function __construct($senderId, $serverKey, $endpoint = self::DEFAULT_ENDPOINT)
     {
-        $this->senderId  = $senderId;
+        $this->senderId = $senderId;
         $this->serverKey = $serverKey;
-        $this->endpoint  = $endpoint;
+        $this->endpoint = $endpoint;
 
 //        $this->guzzleHTTPClient = new Client([
 //            'base_uri' => rtrim($this->host, '/'),

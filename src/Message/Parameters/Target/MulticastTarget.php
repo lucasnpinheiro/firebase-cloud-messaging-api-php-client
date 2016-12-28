@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Target;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Target;
 
 /**
  * MulticastTarget.
@@ -21,19 +21,15 @@ namespace Fresh\Fcm\Message\Parameters\Target;
  */
 class MulticastTarget implements TargetInterface
 {
-    /**
-     * @var array $registrationTokens Registration tokens
-     */
+    /** @var array */
     private $registrationTokens = [];
 
     /**
-     * Add registration token.
-     *
-     * @param string $registrationToken Registration token
+     * @param string $registrationToken
      *
      * @return MulticastTarget
      */
-    public function addRegistrationToken(string $registrationToken)
+    public function addRegistrationToken($registrationToken)
     {
         if (!in_array($registrationToken, $this->registrationTokens)) {
             $this->registrationTokens[] = $registrationToken;
@@ -43,9 +39,7 @@ class MulticastTarget implements TargetInterface
     }
 
     /**
-     * Set registration tokens.
-     *
-     * @param array $registrationTokens Registration tokens
+     * @param array $registrationTokens
      *
      * @return MulticastTarget
      */
@@ -57,11 +51,9 @@ class MulticastTarget implements TargetInterface
     }
 
     /**
-     * Get registration tokens.
-     *
      * @return array
      */
-    public function getRegistrationTokens(): array
+    public function getRegistrationTokens()
     {
         return $this->registrationTokens;
     }

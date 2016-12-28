@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Payload\Notification;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification;
 
-use Fresh\Fcm\Message\Parameters\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
 
 /**
  * AbstractNotificationPayload.
@@ -19,24 +19,18 @@ use Fresh\Fcm\Message\Parameters\Payload\PayloadInterface;
  */
 abstract class AbstractNotificationPayload implements PayloadInterface
 {
-    /**
-     * @var string $body Body
-     */
+    /** @var string */
     private $body = '';
 
-    /**
-     * @var string $title Title
-     */
+    /** @var string */
     private $title = '';
 
     /**
-     * Set body.
-     *
-     * @param string $body Body
+     * @param string $body
      *
      * @return $this|AbstractNotificationPayload
      */
-    public function setBody(string $body): AbstractNotificationPayload
+    public function setBody($body)
     {
         $this->body = $body;
 
@@ -44,23 +38,19 @@ abstract class AbstractNotificationPayload implements PayloadInterface
     }
 
     /**
-     * Get body.
-     *
      * @return string
      */
-    public function getBody(): string
+    public function getBody()
     {
         return $this->body;
     }
 
     /**
-     * Set title.
-     *
-     * @param string $title Title
+     * @param string $title
      *
      * @return $this|AbstractNotificationPayload
      */
-    public function setTitle(string $title): AbstractNotificationPayload
+    public function setTitle($title)
     {
         $this->title = $title;
 
@@ -68,11 +58,9 @@ abstract class AbstractNotificationPayload implements PayloadInterface
     }
 
     /**
-     * Get title.
-     *
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->title;
     }

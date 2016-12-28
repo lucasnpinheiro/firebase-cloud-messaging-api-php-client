@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Payload\Notification;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification;
 
 /**
  * AndroidNotificationPayload.
@@ -17,29 +17,21 @@ namespace Fresh\Fcm\Message\Parameters\Payload\Notification;
  */
 final class AndroidNotificationPayload extends AbstractMobileNotificationPayload
 {
-    /**
-     * @var string $icon Icon
-     */
+    /** @var string */
     private $icon;
 
-    /**
-     * @var string $tag Tag
-     */
+    /** @var string */
     private $tag;
 
-    /**
-     * @var string $color Color
-     */
+    /** @var string */
     private $color;
 
     /**
-     * Set icon.
-     *
-     * @param string $icon Icon
+     * @param string $icon
      *
      * @return $this|AndroidNotificationPayload
      */
-    public function setIcon(string $icon): AndroidNotificationPayload
+    public function setIcon($icon)
     {
         $this->icon = $icon;
 
@@ -47,23 +39,19 @@ final class AndroidNotificationPayload extends AbstractMobileNotificationPayload
     }
 
     /**
-     * Get icon.
-     *
      * @return string
      */
-    public function getIcon(): string
+    public function getIcon()
     {
         return $this->icon;
     }
 
     /**
-     * Set tag.
-     *
-     * @param string $tag Tag
+     * @param string $tag
      *
      * @return $this|AndroidNotificationPayload
      */
-    public function setTag(string $tag): AndroidNotificationPayload
+    public function setTag($tag)
     {
         $this->tag = $tag;
 
@@ -71,23 +59,19 @@ final class AndroidNotificationPayload extends AbstractMobileNotificationPayload
     }
 
     /**
-     * Get tag.
-     *
      * @return string
      */
-    public function getTag(): string
+    public function getTag()
     {
         return $this->tag;
     }
 
     /**
-     * Set color.
-     *
-     * @param string $color Color
+     * @param string $color
      *
      * @return $this|AndroidNotificationPayload
      */
-    public function setColor(string $color): AndroidNotificationPayload
+    public function setColor($color)
     {
         $this->color = $color;
 
@@ -95,11 +79,9 @@ final class AndroidNotificationPayload extends AbstractMobileNotificationPayload
     }
 
     /**
-     * Get color.
-     *
      * @return string
      */
-    public function getColor(): string
+    public function getColor()
     {
         return $this->color;
     }

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Type;
+namespace Fresh\FirebaseCloudMessaging\Message\Type;
 
 /**
  * IosMessage.

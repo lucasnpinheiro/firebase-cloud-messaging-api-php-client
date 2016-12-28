@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Type;
+namespace Fresh\FirebaseCloudMessaging\Message\Type;
 
-use Fresh\Fcm\Message\Parameters\Options\OptionsInterface;
-use Fresh\Fcm\Message\Parameters\Payload\PayloadInterface;
-use Fresh\Fcm\Message\Parameters\Target\TargetInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\OptionsInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Target\TargetInterface;
 
 /**
  * AbstractMessage.
@@ -21,25 +21,19 @@ use Fresh\Fcm\Message\Parameters\Target\TargetInterface;
  */
 abstract class AbstractMessage implements MessageInterface
 {
-    /**
-     * @var TargetInterface $target Target
-     */
+    /** @var TargetInterface */
     protected $target;
 
-    /**
-     * @var OptionsInterface $options Options
-     */
+    /** @var OptionsInterface */
     protected $options;
 
-    /**
-     * @var PayloadInterface $payload Payload
-     */
+    /** @var PayloadInterface */
     protected $payload;
 
     /**
      * {@inheritdoc}
      */
-    public function setTarget(TargetInterface $target): MessageInterface
+    public function setTarget(TargetInterface $target)
     {
         $this->target = $target;
 
@@ -49,7 +43,7 @@ abstract class AbstractMessage implements MessageInterface
     /**
      * {@inheritdoc}
      */
-    public function getTarget(): TargetInterface
+    public function getTarget()
     {
         return $this->target;
     }
@@ -57,7 +51,7 @@ abstract class AbstractMessage implements MessageInterface
     /**
      * {@inheritdoc}
      */
-    public function setOptions(OptionsInterface $options): MessageInterface
+    public function setOptions(OptionsInterface $options)
     {
         $this->options = $options;
 
@@ -67,7 +61,7 @@ abstract class AbstractMessage implements MessageInterface
     /**
      * {@inheritdoc}
      */
-    public function getOptions(): OptionsInterface
+    public function getOptions()
     {
         return $this->options;
     }
@@ -75,17 +69,15 @@ abstract class AbstractMessage implements MessageInterface
     /**
      * {@inheritdoc}
      */
-    public function setPayload(PayloadInterface $payload): MessageInterface
+    public function setPayload(PayloadInterface $payload)
     {
-
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPayload(): PayloadInterface
+    public function getPayload()
     {
-
     }
 
     /**
@@ -93,6 +85,5 @@ abstract class AbstractMessage implements MessageInterface
      */
     public function getBodyAsJson()
     {
-
     }
 }

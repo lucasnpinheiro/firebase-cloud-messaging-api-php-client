@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Target;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Target;
 
 /**
  * Class ConditionTarget.
@@ -17,27 +17,21 @@ namespace Fresh\Fcm\Message\Parameters\Target;
  */
 class ConditionTarget implements TargetInterface
 {
-    /**
-     * @var string $condition Condition
-     */
+    /** @var string */
     private $condition;
 
     /**
-     * Set condition.
-     *
-     * @param string $condition Condition
+     * @param string $condition
      */
-    public function setCondition(string $condition)
+    public function setCondition($condition)
     {
         $this->condition = $condition;
     }
 
     /**
-     * Get condition.
-     *
      * @return string
      */
-    public function getCondition(): string
+    public function getCondition()
     {
         return $this->condition;
     }

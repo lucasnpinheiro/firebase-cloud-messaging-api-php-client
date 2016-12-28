@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Builder;
+namespace Fresh\FirebaseCloudMessaging\Message\Builder;
 
 /**
  * AndroidMessageBuilder.

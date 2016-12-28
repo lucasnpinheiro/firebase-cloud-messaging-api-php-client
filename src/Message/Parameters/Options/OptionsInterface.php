@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Options;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Options;
 
 /**
  * OptionsInterface.
@@ -18,51 +18,37 @@ namespace Fresh\Fcm\Message\Parameters\Options;
 interface OptionsInterface
 {
     /**
-     * Get value of `collapse_key` option.
-     *
      * @return string
      */
-    public function getCollapseKey(): string;
+    public function getCollapseKey();
 
     /**
-     * Get value of `priority` option.
-     *
      * @return string
      */
-    public function getPriority(): string;
+    public function getPriority();
 
     /**
-     * Get value of `content_available` option.
-     *
      * @return bool
      */
-    public function isContentAvailable(): bool;
+    public function isContentAvailable();
 
     /**
-     * Get value of `delay_with_idle` option.
-     *
      * @return bool
      */
-    public function isDelayWithIdle(): bool;
+    public function isDelayWithIdle();
 
     /**
-     * Get value of `time_to_live` option.
-     *
      * @return int
      */
-    public function getTTL(): int;
+    public function getTTL();
 
     /**
-     * Get value of `restricted_package_name` option.
-     *
      * @return string
      */
-    public function getRestrictedPackageName(): string;
+    public function getRestrictedPackageName();
 
     /**
-     * Get value of `dry_run` option.
-     *
      * @return bool
      */
-    public function isDryRun(): bool;
+    public function isDryRun();
 }

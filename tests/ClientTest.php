@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Tests\Fresh\Fcm;
+namespace Tests\Fresh\FirebaseCloudMessaging;
 
-use Fresh\Fcm\Client;
-use Fresh\Fcm\Message\MessageFactory;
-use Fresh\Fcm\Message\Parameters\Options\Options;
-use Fresh\Fcm\Message\Parameters\Payload\Notification\AndroidNotificationPayload;
-use Fresh\Fcm\Message\Parameters\Target\TargetFactory;
+use Fresh\FirebaseCloudMessaging\Client;
+use Fresh\FirebaseCloudMessaging\Message\MessageFactory;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\Options;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification\AndroidNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Target\TargetFactory;
 
 /**
  * ClientTest.
@@ -39,7 +39,5 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                                  ->setPayload($androidPayload);
 
         $client->sendMessage($message);
-
-
     }
 }

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Payload\Notification;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification;
 
 /**
  * AbstractMobileNotificationPayload.
@@ -17,44 +17,30 @@ namespace Fresh\Fcm\Message\Parameters\Payload\Notification;
  */
 abstract class AbstractMobileNotificationPayload extends AbstractNotificationPayload
 {
-    /**
-     * @var string $body Sound
-     */
+    /** @var string */
     private $sound;
 
-    /**
-     * @var string $title Click action
-     */
+    /** @var string */
     private $clickAction;
 
-    /**
-     * @var string $bodyLocKey Body loc key
-     */
+    /** @var string */
     private $bodyLocKey;
 
-    /**
-     * @var string[] $bodyLocArgs Body loc args
-     */
+    /** @var string[] */
     private $bodyLocArgs;
 
-    /**
-     * @var string $titleLocKey Title loc key
-     */
+    /** @var string */
     private $titleLocKey;
 
-    /**
-     * @var string[] $titleLocArgs Title loc args
-     */
+    /** @var string[] */
     private $titleLocArgs;
 
     /**
-     * Set sound.
-     *
-     * @param string $sound Sound
+     * @param string $sound
      *
      * @return $this|AbstractMobileNotificationPayload
      */
-    public function setSound(string $sound): AbstractMobileNotificationPayload
+    public function setSound($sound)
     {
         $this->sound = $sound;
 
@@ -62,23 +48,19 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     }
 
     /**
-     * Get sound.
-     *
      * @return string
      */
-    public function getSound(): string
+    public function getSound()
     {
         return $this->sound;
     }
 
     /**
-     * Set click action.
-     *
-     * @param string $clickAction Click action
+     * @param string $clickAction
      *
      * @return $this|AbstractMobileNotificationPayload
      */
-    public function setClickAction(string $clickAction): AbstractMobileNotificationPayload
+    public function setClickAction($clickAction)
     {
         $this->clickAction = $clickAction;
 
@@ -86,23 +68,19 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     }
 
     /**
-     * Get click action.
-     *
      * @return string
      */
-    public function getClickAction(): string
+    public function getClickAction()
     {
         return $this->clickAction;
     }
 
     /**
-     * Set body loc key.
-     *
-     * @param string $bodyLocKey Body loc key
+     * @param string $bodyLocKey
      *
      * @return $this|AbstractMobileNotificationPayload
      */
-    public function setBodyLocKey(string $bodyLocKey): AbstractMobileNotificationPayload
+    public function setBodyLocKey($bodyLocKey)
     {
         $this->bodyLocKey = $bodyLocKey;
 
@@ -110,23 +88,19 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     }
 
     /**
-     * Get body loc key.
-     *
      * @return string
      */
-    public function getBodyLocKey(): string
+    public function getBodyLocKey()
     {
         return $this->bodyLocKey;
     }
 
     /**
-     * Set body loc args.
-     *
-     * @param string[] $bodyLocArgs Body loc args
+     * @param string[] $bodyLocArgs
      *
      * @return $this|AbstractMobileNotificationPayload
      */
-    public function setBodyLocArgs(array $bodyLocArgs): AbstractMobileNotificationPayload
+    public function setBodyLocArgs(array $bodyLocArgs)
     {
         $this->bodyLocArgs = $bodyLocArgs;
 
@@ -134,23 +108,19 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     }
 
     /**
-     * Get body loc args.
-     *
      * @return string[]
      */
-    public function getBodyLocArgs(): array
+    public function getBodyLocArgs()
     {
         return $this->bodyLocArgs;
     }
 
     /**
-     * Set title loc key.
-     *
-     * @param string $titleLocKey Title loc key
+     * @param string $titleLocKey
      *
      * @return $this|AbstractMobileNotificationPayload
      */
-    public function setTitleLocKey(string $titleLocKey): AbstractMobileNotificationPayload
+    public function setTitleLocKey($titleLocKey)
     {
         $this->titleLocKey = $titleLocKey;
 
@@ -158,23 +128,19 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     }
 
     /**
-     * Get title loc key.
-     *
      * @return string
      */
-    public function getTitleLocKey(): string
+    public function getTitleLocKey()
     {
         return $this->titleLocKey;
     }
 
     /**
-     * Set title loc args.
-     *
-     * @param string[] $titleLocArgs Title loc args
+     * @param string[] $titleLocArgs
      *
      * @return $this|AbstractMobileNotificationPayload
      */
-    public function setTitleLocArgs(array $titleLocArgs): AbstractMobileNotificationPayload
+    public function setTitleLocArgs(array $titleLocArgs)
     {
         $this->titleLocArgs = $titleLocArgs;
 
@@ -182,11 +148,9 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     }
 
     /**
-     * Get title loc args.
-     *
      * @return string[]
      */
-    public function getTitleLocArgs(): array
+    public function getTitleLocArgs()
     {
         return $this->titleLocArgs;
     }

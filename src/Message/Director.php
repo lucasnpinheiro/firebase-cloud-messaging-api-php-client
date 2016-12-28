@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message;
+namespace Fresh\FirebaseCloudMessaging\Message;
 
-use Fresh\Fcm\Message\Builder\MessageBuilderInterface;
-use Fresh\Fcm\Message\Type\MessageInterface;
+use Fresh\FirebaseCloudMessaging\Message\Builder\MessageBuilderInterface;
+use Fresh\FirebaseCloudMessaging\Message\Type\MessageInterface;
 
 /**
  * Director.
@@ -20,15 +20,11 @@ use Fresh\Fcm\Message\Type\MessageInterface;
  */
 class Director
 {
-    /**
-     * @var MessageBuilderInterface $messageBuilder Message builder
-     */
+    /** @var MessageBuilderInterface */
     private $messageBuilder;
 
     /**
-     * Constructor.
-     *
-     * @param MessageBuilderInterface $messageBuilder Message builder
+     * @param MessageBuilderInterface $messageBuilder
      */
     public function __construct(MessageBuilderInterface $messageBuilder)
     {
@@ -36,8 +32,6 @@ class Director
     }
 
     /**
-     * The director don't know about concrete part.
-     *
      * @param MessageBuilderInterface $builder
      *
      * @return MessageInterface

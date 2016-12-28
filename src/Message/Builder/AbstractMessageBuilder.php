@@ -8,16 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Builder;
+namespace Fresh\FirebaseCloudMessaging\Message\Builder;
 
-use Fresh\Fcm\Message\Parameters\Options\OptionsInterface;
-use Fresh\Fcm\Message\Parameters\Options\Priority;
-use Fresh\Fcm\Message\Parameters\Options\TTL;
-use Fresh\Fcm\Message\Parameters\Target\ConditionTarget;
-use Fresh\Fcm\Message\Parameters\Target\MulticastTarget;
-use Fresh\Fcm\Message\Parameters\Target\SingleRecipientTarget;
-use Fresh\Fcm\Message\Parameters\Target\TargetInterface;
-use Fresh\Fcm\Message\Type\MessageInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\OptionsInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\Priority;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\TTL;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Target;
 
 /**
  * AbstractMessageBuilder.
@@ -26,35 +22,29 @@ use Fresh\Fcm\Message\Type\MessageInterface;
  */
 abstract class AbstractMessageBuilder implements MessageBuilderInterface
 {
-    /**
-     * @var array $targetPart Target part of a message.
-     */
+    /** @var array */
     protected $targetPart = [];
 
-    /**
-     * @var array $optionsPart Options part of a message.
-     */
+    /** @var array */
     protected $optionsPart = [];
 
-    /**
-     * @var array $payloadPart Payload part of a message.
-     */
+    /** @var array */
     protected $payloadPart = [];
 
     /**
      * {@inheritdoc}
      */
-    public function buildTargetPart(TargetInterface $target)
+    public function buildTargetPart(Target\TargetInterface $target)
     {
-        if ($target instanceof ConditionTarget) {
+        if ($target instanceof Target\ConditionTarget) {
             $this->targetPart = [
                 'condition' => $target->getCondition(),
             ];
-        } elseif ($target instanceof MulticastTarget) {
+        } elseif ($target instanceof Target\MulticastTarget) {
             $this->targetPart = [
                 'registration_ids' => $target->getRegistrationTokens(),
             ];
-        } elseif ($target instanceof SingleRecipientTarget) {
+        } elseif ($target instanceof Target\SingleRecipientTarget) {
             $this->targetPart = [
                 'to' => $target->getRegistrationToken(),
             ];
@@ -110,7 +100,10 @@ abstract class AbstractMessageBuilder implements MessageBuilderInterface
         $this->optionsPart = $optionsPart;
     }
 
-    public function getMessage(): MessageInterface
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessage()
     {
         return array_merge($this->targetPart, $this->optionsPart, $this->payloadPart);
     }

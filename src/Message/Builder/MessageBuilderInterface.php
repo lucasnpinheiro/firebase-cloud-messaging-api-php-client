@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Builder;
+namespace Fresh\FirebaseCloudMessaging\Message\Builder;
 
-use Fresh\Fcm\Message\Parameters\Options\OptionsInterface;
-use Fresh\Fcm\Message\Parameters\Payload\PayloadInterface;
-use Fresh\Fcm\Message\Parameters\Target\TargetInterface;
-use Fresh\Fcm\Message\Type\MessageInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\OptionsInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Target\TargetInterface;
+use Fresh\FirebaseCloudMessaging\Message\Type\MessageInterface;
 
 /**
  * MessageBuilderInterface.
@@ -28,8 +28,6 @@ interface MessageBuilderInterface
     public function createMessage();
 
     /**
-     * Build target part of the message.
-     *
      * @param TargetInterface $target
      *
      * @throws \Exception
@@ -37,23 +35,17 @@ interface MessageBuilderInterface
     public function buildTargetPart(TargetInterface $target);
 
     /**
-     * Build options part of the message.
-     *
-     * @param OptionsInterface $options Options
+     * @param OptionsInterface $options
      */
     public function buildOptionsPart(OptionsInterface $options);
 
     /**
-     * Build payload part of the message.
-     *
-     * @param PayloadInterface $payload Payload
+     * @param PayloadInterface $payload
      */
     public function buildPayloadPart(PayloadInterface $payload);
 
     /**
-     * Get message.
-     *
      * @return MessageInterface
      */
-    public function getMessage(): MessageInterface;
+    public function getMessage();
 }

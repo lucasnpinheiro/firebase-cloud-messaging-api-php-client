@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message;
+namespace Fresh\FirebaseCloudMessaging\Message;
 
-use Fresh\Fcm\Message\Type\AndroidMessage;
-use Fresh\Fcm\Message\Type\IosMessage;
-use Fresh\Fcm\Message\Type\SimpleMessage;
+use Fresh\FirebaseCloudMessaging\Message\Type\AndroidMessage;
+use Fresh\FirebaseCloudMessaging\Message\Type\IosMessage;
+use Fresh\FirebaseCloudMessaging\Message\Type\SimpleMessage;
 
 /**
  * Class MessageFactory.
@@ -22,31 +22,25 @@ use Fresh\Fcm\Message\Type\SimpleMessage;
 class MessageFactory
 {
     /**
-     * Create simple message.
-     *
      * @return SimpleMessage
      */
-    public static function createSimpleMessage(): SimpleMessage
+    public static function createSimpleMessage()
     {
         return new SimpleMessage();
     }
 
     /**
-     * Create message for Android.
-     *
      * @return AndroidMessage
      */
-    public static function createAndroidMessage(): AndroidMessage
+    public static function createAndroidMessage()
     {
         return new AndroidMessage();
     }
 
     /**
-     * Create message for iOS.
-     *
      * @return IosMessage
      */
-    public static function createIosMessage(): IosMessage
+    public static function createIosMessage()
     {
         return new IosMessage();
     }

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Target;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Target;
 
 /**
  * TargetFactory.

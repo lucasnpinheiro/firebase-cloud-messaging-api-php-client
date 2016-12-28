@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Payload\Combined;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Combined;
 
-use Fresh\Fcm\Message\Parameters\Payload\Data\DataPayload;
-use Fresh\Fcm\Message\Parameters\Payload\Notification\AbstractNotificationPayload;
-use Fresh\Fcm\Message\Parameters\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Data\DataPayload;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification\AbstractNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
 
 /**
  * CombinedPayload.
@@ -21,24 +21,18 @@ use Fresh\Fcm\Message\Parameters\Payload\PayloadInterface;
  */
 class CombinedPayload implements PayloadInterface
 {
-    /**
-     * @var DataPayload $dataPayload Data payload
-     */
+    /** @var DataPayload */
     private $dataPayload;
 
-    /**
-     * @var AbstractNotificationPayload $notificationPayload Notification payload
-     */
+    /** @var AbstractNotificationPayload */
     private $notificationPayload;
 
     /**
-     * Set data payload.
-     *
-     * @param DataPayload $dataPayload Data payload
+     * @param DataPayload $dataPayload
      *
      * @return CombinedPayload
      */
-    public function setDataPayload(DataPayload $dataPayload): CombinedPayload
+    public function setDataPayload(DataPayload $dataPayload)
     {
         $this->dataPayload = $dataPayload;
 
@@ -46,23 +40,19 @@ class CombinedPayload implements PayloadInterface
     }
 
     /**
-     * Get data payload.
-     *
      * @return DataPayload
      */
-    public function getDataPayload(): DataPayload
+    public function getDataPayload()
     {
         return $this->dataPayload;
     }
 
     /**
-     * Set notification payload.
-     *
-     * @param AbstractNotificationPayload $notificationPayload Notification payload
+     * @param AbstractNotificationPayload $notificationPayload
      *
      * @return CombinedPayload
      */
-    public function setNotificationPayload(AbstractNotificationPayload $notificationPayload): CombinedPayload
+    public function setNotificationPayload(AbstractNotificationPayload $notificationPayload)
     {
         $this->notificationPayload = $notificationPayload;
 
@@ -70,11 +60,9 @@ class CombinedPayload implements PayloadInterface
     }
 
     /**
-     * Get notification payload.
-     *
      * @return AbstractNotificationPayload
      */
-    public function getNotificationPayload(): AbstractNotificationPayload
+    public function getNotificationPayload()
     {
         return $this->notificationPayload;
     }

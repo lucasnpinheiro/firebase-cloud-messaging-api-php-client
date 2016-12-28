@@ -1,7 +1,5 @@
 # Firebase Cloud Messaging API PHP Client
 
-FCM - Firebase Cloud Messaging
-
 Supported platforms:
 * Android
 * iOS

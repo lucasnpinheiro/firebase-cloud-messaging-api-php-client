@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Target;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Target;
 
 /**
  * SingleRecipientTarget.
@@ -20,27 +20,21 @@ namespace Fresh\Fcm\Message\Parameters\Target;
  */
 class SingleRecipientTarget implements TargetInterface
 {
-    /**
-     * @var string $registrationToken Registration token
-     */
+    /** @var string */
     private $registrationToken = '';
 
     /**
-     * Set registration token.
-     *
-     * @param string $registrationToken Registration token
+     * @param string $registrationToken
      */
-    public function setRegistrationToken(string $registrationToken)
+    public function setRegistrationToken($registrationToken)
     {
         $this->registrationToken = $registrationToken;
     }
 
     /**
-     * Get registration token.
-     *
      * @return string
      */
-    public function getRegistrationToken(): string
+    public function getRegistrationToken()
     {
         return $this->registrationToken;
     }

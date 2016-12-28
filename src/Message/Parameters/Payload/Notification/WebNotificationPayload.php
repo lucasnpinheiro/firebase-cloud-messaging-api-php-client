@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Payload\Notification;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification;
 
 /**
  * WebNotificationPayload.

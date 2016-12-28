@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Type;
+namespace Fresh\FirebaseCloudMessaging\Message\Type;
 
-use Fresh\Fcm\Message\Parameters\Options\OptionsInterface;
-use Fresh\Fcm\Message\Parameters\Payload\PayloadInterface;
-use Fresh\Fcm\Message\Parameters\Target\TargetInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\OptionsInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Target\TargetInterface;
 
 /**
  * MessageInterface.
@@ -22,56 +22,42 @@ use Fresh\Fcm\Message\Parameters\Target\TargetInterface;
 interface MessageInterface
 {
     /**
-     * Set target.
-     *
-     * @param TargetInterface $target Target
+     * @param TargetInterface $target
      *
      * @return MessageInterface
      */
-    public function setTarget(TargetInterface $target): MessageInterface;
+    public function setTarget(TargetInterface $target);
 
     /**
-     * Get target.
-     *
      * @return TargetInterface
      */
-    public function getTarget(): TargetInterface;
+    public function getTarget();
 
     /**
-     * Set options.
-     *
-     * @param OptionsInterface $options Options
+     * @param OptionsInterface $options
      *
      * @return MessageInterface
      */
-    public function setOptions(OptionsInterface $options): MessageInterface;
+    public function setOptions(OptionsInterface $options);
 
     /**
-     * Get options.
-     *
      * @return OptionsInterface
      */
-    public function getOptions(): OptionsInterface;
+    public function getOptions();
 
     /**
-     * Set payload.
-     *
-     * @param PayloadInterface $payload Payload
+     * @param PayloadInterface $payload
      *
      * @return MessageInterface
      */
-    public function setPayload(PayloadInterface $payload): MessageInterface;
+    public function setPayload(PayloadInterface $payload);
 
     /**
-     * Get payload.
-     *
      * @return PayloadInterface
      */
-    public function getPayload(): PayloadInterface;
+    public function getPayload();
 
     /**
-     * Get body message as JSON.
-     *
      * @return string
      */
     public function getBodyAsJson();

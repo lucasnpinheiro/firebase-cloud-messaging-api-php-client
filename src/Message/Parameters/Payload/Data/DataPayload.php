@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Payload\Data;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Data;
 
-use Fresh\Fcm\Message\Parameters\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
 
 /**
  * DataPayload.
@@ -19,15 +19,11 @@ use Fresh\Fcm\Message\Parameters\Payload\PayloadInterface;
  */
 class DataPayload implements PayloadInterface
 {
-    /**
-     * @var array $data Data
-     */
+    /** @var array */
     private $data = [];
 
     /**
-     * Set data.
-     *
-     * @param array $data Data
+     * @param array $data
      */
     public function setData(array $data)
     {
@@ -35,11 +31,9 @@ class DataPayload implements PayloadInterface
     }
 
     /**
-     * Get data.
-     *
      * @return array
      */
-    public function getData(): array
+    public function getData()
     {
         return $this->data;
     }

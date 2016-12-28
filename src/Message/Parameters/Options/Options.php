@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\Fcm\Message\Parameters\Options;
+namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Options;
 
 /**
  * Class Options.
@@ -20,49 +20,33 @@ namespace Fresh\Fcm\Message\Parameters\Options;
  */
 final class Options implements OptionsInterface
 {
-    /**
-     * @var string $collapseKey Collapse key
-     */
+    /** @var string */
     private $collapseKey = '';
 
-    /**
-     * @var string $priority Priority
-     */
+    /** @var string */
     private $priority = Priority::NORMAL;
 
-    /**
-     * @var bool $contentAvailable Content available
-     */
+    /** @var bool */
     private $contentAvailable = false;
 
-    /**
-     * @var bool $delayWithIdle Delay with idle
-     */
+    /** @var bool */
     private $delayWithIdle = false;
 
-    /**
-     * @var int $ttl Time to live
-     */
+    /** @var int */
     private $ttl = TTL::DEFAULT_IN_SECONDS;
 
-    /**
-     * @var string $restrictedPackageName Restricted package name.
-     */
+    /** @var string */
     private $restrictedPackageName = '';
 
-    /**
-     * @var bool $dryRun Dry run
-     */
+    /** @var bool */
     private $dryRun = false;
 
     /**
-     * Set value for `collapse_key` option.
-     *
-     * @param string $collapseKey Collapse key
+     * @param string $collapseKey
      *
      * @return Options
      */
-    public function setCollapseKey(string $collapseKey): Options
+    public function setCollapseKey($collapseKey)
     {
         $this->collapseKey = $collapseKey;
 
@@ -72,19 +56,17 @@ final class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function getCollapseKey(): string
+    public function getCollapseKey()
     {
         return $this->collapseKey;
     }
 
     /**
-     * Set value for `priority` option.
-     *
-     * @param string $priority Priority
+     * @param string $priority
      *
      * @return Options
      */
-    public function setPriority(string $priority): Options
+    public function setPriority($priority)
     {
         $this->priority = $priority;
 
@@ -94,19 +76,17 @@ final class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function getPriority(): string
+    public function getPriority()
     {
         return $this->priority;
     }
 
     /**
-     * Set value for `content_available` option.
-     *
-     * @param bool $contentAvailable Content available
+     * @param bool $contentAvailable
      *
      * @return Options
      */
-    public function setContentAvailable(bool $contentAvailable): Options
+    public function setContentAvailable($contentAvailable)
     {
         $this->contentAvailable = $contentAvailable;
 
@@ -116,19 +96,17 @@ final class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function isContentAvailable(): bool
+    public function isContentAvailable()
     {
         return $this->contentAvailable;
     }
 
     /**
-     * Set value for `delay_with_idle` option.
-     *
-     * @param bool $delayWithIdle Delay with idle
+     * @param bool $delayWithIdle
      *
      * @return Options
      */
-    public function setDelayWithIdle(bool $delayWithIdle): Options
+    public function setDelayWithIdle($delayWithIdle)
     {
         $this->delayWithIdle = $delayWithIdle;
 
@@ -138,19 +116,17 @@ final class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function isDelayWithIdle(): bool
+    public function isDelayWithIdle()
     {
         return $this->delayWithIdle;
     }
 
     /**
-     * Set value for `time_to_live` option.
-     *
-     * @param int $ttl Time to live
+     * @param int $ttl
      *
      * @return Options
      */
-    public function setTTL(int $ttl): Options
+    public function setTTL($ttl)
     {
         $this->ttl = $ttl;
 
@@ -160,19 +136,17 @@ final class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function getTTL(): int
+    public function getTTL()
     {
         return $this->ttl;
     }
 
     /**
-     * Set value for `restricted_package_name` option.
-     *
-     * @param string $restrictedPackageName Restricted package name
+     * @param string $restrictedPackageName
      *
      * @return Options
      */
-    public function setRestrictedPackageName(string $restrictedPackageName): Options
+    public function setRestrictedPackageName($restrictedPackageName)
     {
         $this->restrictedPackageName = $restrictedPackageName;
 
@@ -182,19 +156,17 @@ final class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function getRestrictedPackageName(): string
+    public function getRestrictedPackageName()
     {
         return $this->restrictedPackageName;
     }
 
     /**
-     * Set value for `dry_run` option.
-     *
-     * @param bool $dryRun Dry run
+     * @param bool $dryRun
      *
      * @return Options
      */
-    public function setDryRun(bool $dryRun): Options
+    public function setDryRun($dryRun)
     {
         $this->dryRun = $dryRun;
 
@@ -204,7 +176,7 @@ final class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function isDryRun(): bool
+    public function isDryRun()
     {
         return $this->dryRun;
     }
