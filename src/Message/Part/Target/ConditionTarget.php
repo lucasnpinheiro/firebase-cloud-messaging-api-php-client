@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Target;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Target;
 
 /**
  * Class ConditionTarget.

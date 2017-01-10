@@ -11,6 +11,8 @@
 namespace Fresh\FirebaseCloudMessaging;
 
 use Fresh\FirebaseCloudMessaging\Message\Type\MessageInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
 //use GuzzleHttp\Client;
 //use GuzzleHttp\Exception\ClientException;
 //use GuzzleHttp\Exception\GuzzleException;
@@ -30,22 +32,25 @@ class Client
     private $endpoint;
 
     /** @var int */
-    private $senderId;
+    private $messagingSenderId;
 
     /** @var string */
     private $serverKey;
+
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
 
     /** @var Client */
     private $guzzleHTTPClient;
 
     /**
-     * @param int    $senderId
+     * @param int    $messagingSenderId
      * @param string $serverKey
      * @param string $endpoint
      */
-    public function __construct($senderId, $serverKey, $endpoint = self::DEFAULT_ENDPOINT)
+    public function __construct($messagingSenderId, $serverKey, $endpoint = self::DEFAULT_ENDPOINT)
     {
-        $this->senderId = $senderId;
+        $this->messagingSenderId = $messagingSenderId;
         $this->serverKey = $serverKey;
         $this->endpoint = $endpoint;
 
@@ -54,9 +59,14 @@ class Client
 //        ]);
     }
 
+    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher = null)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     public function sendMessage(MessageInterface $message)
     {
-        $response = $this->guzzleHTTPClient->post($uri, $body);
-        $message->build();
+//        $response = $this->guzzleHTTPClient->post($uri, $body);
+//        $message->build();
     }
 }

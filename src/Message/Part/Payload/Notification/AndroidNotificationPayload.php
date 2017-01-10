@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
 /**
  * AndroidNotificationPayload.
@@ -29,7 +29,7 @@ final class AndroidNotificationPayload extends AbstractMobileNotificationPayload
     /**
      * @param string $icon
      *
-     * @return $this|AndroidNotificationPayload
+     * @return $this
      */
     public function setIcon($icon)
     {
@@ -49,7 +49,7 @@ final class AndroidNotificationPayload extends AbstractMobileNotificationPayload
     /**
      * @param string $tag
      *
-     * @return $this|AndroidNotificationPayload
+     * @return $this
      */
     public function setTag($tag)
     {
@@ -69,7 +69,7 @@ final class AndroidNotificationPayload extends AbstractMobileNotificationPayload
     /**
      * @param string $color
      *
-     * @return $this|AndroidNotificationPayload
+     * @return $this
      */
     public function setColor($color)
     {

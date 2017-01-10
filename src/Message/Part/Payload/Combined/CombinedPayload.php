@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Combined;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Combined;
 
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Data\DataPayload;
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification\AbstractNotificationPayload;
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Data\DataPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AbstractNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadInterface;
 
 /**
  * CombinedPayload.

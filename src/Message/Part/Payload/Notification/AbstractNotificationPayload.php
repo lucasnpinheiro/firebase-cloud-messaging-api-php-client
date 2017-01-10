@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadInterface;
 
 /**
  * AbstractNotificationPayload.
@@ -20,15 +20,38 @@ use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
 abstract class AbstractNotificationPayload implements PayloadInterface
 {
     /** @var string */
+    private $title = '';
+
+    /** @var string */
     private $body = '';
 
     /** @var string */
-    private $title = '';
+    private $clickAction = '';
+
+    /**
+     * @param string $title
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
     /**
      * @param string $body
      *
-     * @return $this|AbstractNotificationPayload
+     * @return $this
      */
     public function setBody($body)
     {
@@ -46,13 +69,13 @@ abstract class AbstractNotificationPayload implements PayloadInterface
     }
 
     /**
-     * @param string $title
+     * @param string $clickAction
      *
-     * @return $this|AbstractNotificationPayload
+     * @return $this
      */
-    public function setTitle($title)
+    public function setClickAction($clickAction)
     {
-        $this->title = $title;
+        $this->clickAction = $clickAction;
 
         return $this;
     }
@@ -60,8 +83,8 @@ abstract class AbstractNotificationPayload implements PayloadInterface
     /**
      * @return string
      */
-    public function getTitle()
+    public function getClickAction()
     {
-        return $this->title;
+        return $this->clickAction;
     }
 }

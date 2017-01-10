@@ -12,9 +12,9 @@ namespace Tests\Fresh\FirebaseCloudMessaging;
 
 use Fresh\FirebaseCloudMessaging\Client;
 use Fresh\FirebaseCloudMessaging\Message\MessageFactory;
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\Options;
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification\AndroidNotificationPayload;
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Target\TargetFactory;
+use Fresh\FirebaseCloudMessaging\Message\Part\Options\Options;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AndroidNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Target\TargetFactory;
 
 /**
  * ClientTest.
@@ -31,7 +31,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->setTitle('sdfs')
             ->setTag('');
 
-        $options = (new Options())->setTTL(123);
+        $options = (new Options())->setTimeToLive(123);
 
         $message = MessageFactory::createAndroidMessage()
                                  ->setTarget(TargetFactory::createMulticastTarget()->addRegistrationToken('yo'))

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Options;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Options;
 
 /**
  * OptionsInterface.
@@ -33,14 +33,9 @@ interface OptionsInterface
     public function isContentAvailable();
 
     /**
-     * @return bool
-     */
-    public function isDelayWithIdle();
-
-    /**
      * @return int
      */
-    public function getTTL();
+    public function getTimeToLive();
 
     /**
      * @return string

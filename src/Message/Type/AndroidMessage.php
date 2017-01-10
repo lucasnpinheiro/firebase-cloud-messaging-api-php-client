@@ -15,6 +15,6 @@ namespace Fresh\FirebaseCloudMessaging\Message\Type;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class AndroidMessage implements MessageInterface
+class AndroidMessage extends AbstractMessage
 {
 }

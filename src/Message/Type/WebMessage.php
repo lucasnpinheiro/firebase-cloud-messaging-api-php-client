@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Target;
+namespace Fresh\FirebaseCloudMessaging\Message\Type;
 
 /**
- * TargetInterface.
+ * WebMessage.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-interface TargetInterface
+class WebMessage extends AbstractMessage
 {
 }

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Options;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Options;
 
 /**
  * Class Priority.

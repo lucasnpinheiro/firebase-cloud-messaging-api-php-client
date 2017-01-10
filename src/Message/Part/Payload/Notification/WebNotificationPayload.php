@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
 /**
  * WebNotificationPayload.
@@ -17,4 +17,26 @@ namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification;
  */
 final class WebNotificationPayload extends AbstractNotificationPayload
 {
+    /** @var string */
+    private $icon;
+
+    /**
+     * @param string $icon
+     *
+     * @return $this
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
 }

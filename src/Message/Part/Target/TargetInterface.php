@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Type;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Target;
 
 /**
- * SimpleMessage.
+ * TargetInterface.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class SimpleMessage implements MessageInterface
+interface TargetInterface
 {
 }

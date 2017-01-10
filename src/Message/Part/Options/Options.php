@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Options;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Options;
 
 /**
  * Class Options.
@@ -20,6 +20,12 @@ namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Options;
  */
 final class Options implements OptionsInterface
 {
+    /**
+     * Default `time_to_live` option value is 4 weeks (it is also the maximum TTL allowed for FCM).
+     * In seconds it is 60 seconds * 60 minutes * 24 hours * 28 days = 2419200 seconds.
+     */
+    const DEFAULT_TTL_IN_SECONDS = 2419200;
+
     /** @var string */
     private $collapseKey = '';
 
@@ -29,11 +35,8 @@ final class Options implements OptionsInterface
     /** @var bool */
     private $contentAvailable = false;
 
-    /** @var bool */
-    private $delayWithIdle = false;
-
     /** @var int */
-    private $ttl = TTL::DEFAULT_IN_SECONDS;
+    private $ttl = self::DEFAULT_TTL_IN_SECONDS;
 
     /** @var string */
     private $restrictedPackageName = '';
@@ -44,7 +47,7 @@ final class Options implements OptionsInterface
     /**
      * @param string $collapseKey
      *
-     * @return Options
+     * @return $this
      */
     public function setCollapseKey($collapseKey)
     {
@@ -64,7 +67,7 @@ final class Options implements OptionsInterface
     /**
      * @param string $priority
      *
-     * @return Options
+     * @return $this
      */
     public function setPriority($priority)
     {
@@ -84,7 +87,7 @@ final class Options implements OptionsInterface
     /**
      * @param bool $contentAvailable
      *
-     * @return Options
+     * @return $this
      */
     public function setContentAvailable($contentAvailable)
     {
@@ -102,13 +105,13 @@ final class Options implements OptionsInterface
     }
 
     /**
-     * @param bool $delayWithIdle
+     * @param int $timeToLive
      *
-     * @return Options
+     * @return $this
      */
-    public function setDelayWithIdle($delayWithIdle)
+    public function setTimeToLive($timeToLive)
     {
-        $this->delayWithIdle = $delayWithIdle;
+        $this->ttl = $timeToLive;
 
         return $this;
     }
@@ -116,27 +119,7 @@ final class Options implements OptionsInterface
     /**
      * {@inheritdoc}
      */
-    public function isDelayWithIdle()
-    {
-        return $this->delayWithIdle;
-    }
-
-    /**
-     * @param int $ttl
-     *
-     * @return Options
-     */
-    public function setTTL($ttl)
-    {
-        $this->ttl = $ttl;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTTL()
+    public function getTimeToLive()
     {
         return $this->ttl;
     }
@@ -144,7 +127,7 @@ final class Options implements OptionsInterface
     /**
      * @param string $restrictedPackageName
      *
-     * @return Options
+     * @return $this
      */
     public function setRestrictedPackageName($restrictedPackageName)
     {
@@ -164,7 +147,7 @@ final class Options implements OptionsInterface
     /**
      * @param bool $dryRun
      *
-     * @return Options
+     * @return $this
      */
     public function setDryRun($dryRun)
     {

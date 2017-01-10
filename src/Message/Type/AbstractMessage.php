@@ -10,9 +10,9 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Type;
 
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\OptionsInterface;
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Target\TargetInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Options\OptionsInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Target\TargetInterface;
 
 /**
  * AbstractMessage.
@@ -71,6 +71,9 @@ abstract class AbstractMessage implements MessageInterface
      */
     public function setPayload(PayloadInterface $payload)
     {
+        $this->payload = $payload;
+
+        return $this;
     }
 
     /**
@@ -78,6 +81,7 @@ abstract class AbstractMessage implements MessageInterface
      */
     public function getPayload()
     {
+        return $this->payload;
     }
 
     /**

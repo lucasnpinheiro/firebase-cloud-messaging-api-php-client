@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
 /**
  * AbstractMobileNotificationPayload.
@@ -19,9 +19,6 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
 {
     /** @var string */
     private $sound;
-
-    /** @var string */
-    private $clickAction;
 
     /** @var string */
     private $bodyLocKey;
@@ -38,7 +35,7 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     /**
      * @param string $sound
      *
-     * @return $this|AbstractMobileNotificationPayload
+     * @return $this
      */
     public function setSound($sound)
     {
@@ -56,29 +53,9 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     }
 
     /**
-     * @param string $clickAction
-     *
-     * @return $this|AbstractMobileNotificationPayload
-     */
-    public function setClickAction($clickAction)
-    {
-        $this->clickAction = $clickAction;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getClickAction()
-    {
-        return $this->clickAction;
-    }
-
-    /**
      * @param string $bodyLocKey
      *
-     * @return $this|AbstractMobileNotificationPayload
+     * @return $this
      */
     public function setBodyLocKey($bodyLocKey)
     {
@@ -98,7 +75,7 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     /**
      * @param string[] $bodyLocArgs
      *
-     * @return $this|AbstractMobileNotificationPayload
+     * @return $this
      */
     public function setBodyLocArgs(array $bodyLocArgs)
     {
@@ -118,7 +95,7 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     /**
      * @param string $titleLocKey
      *
-     * @return $this|AbstractMobileNotificationPayload
+     * @return $this
      */
     public function setTitleLocKey($titleLocKey)
     {
@@ -138,7 +115,7 @@ abstract class AbstractMobileNotificationPayload extends AbstractNotificationPay
     /**
      * @param string[] $titleLocArgs
      *
-     * @return $this|AbstractMobileNotificationPayload
+     * @return $this
      */
     public function setTitleLocArgs(array $titleLocArgs)
     {

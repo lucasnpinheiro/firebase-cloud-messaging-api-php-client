@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Data;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Data;
 
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadInterface;
 
 /**
  * DataPayload.

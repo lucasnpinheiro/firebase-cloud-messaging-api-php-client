@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Parameters\Payload\Notification;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
 /**
  * IosNotificationPayload.
@@ -23,7 +23,7 @@ final class IosNotificationPayload extends AbstractMobileNotificationPayload
     /**
      * @param string $badge
      *
-     * @return $this|IosNotificationPayload
+     * @return $this
      */
     public function setBadge($badge)
     {

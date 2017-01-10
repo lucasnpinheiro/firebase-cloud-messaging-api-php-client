@@ -10,10 +10,10 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Builder;
 
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\OptionsInterface;
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\Priority;
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Options\TTL;
-use Fresh\FirebaseCloudMessaging\Message\Parameters\Target;
+use Fresh\FirebaseCloudMessaging\Message\Part\Options\Options;
+use Fresh\FirebaseCloudMessaging\Message\Part\Options\OptionsInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Options\Priority;
+use Fresh\FirebaseCloudMessaging\Message\Part\Target;
 
 /**
  * AbstractMessageBuilder.
@@ -60,7 +60,6 @@ abstract class AbstractMessageBuilder implements MessageBuilderInterface
     {
         $optionsPart = [];
 
-        // TODO
         if (!empty($options->getCollapseKey())) {
             $optionsPart['collapse_key'] = $options->getCollapseKey();
         }
@@ -76,16 +75,11 @@ abstract class AbstractMessageBuilder implements MessageBuilderInterface
             $optionsPart['content_available'] = true;
         }
 
-        // By default `delay_while_idle` option is false. Adding it only if it was changed to true.
-        if ($options->isDelayWithIdle()) {
-            $optionsPart['delay_while_idle'] = true;
-        }
-
         // By default TTL for message in FCM is 4 weeks, it is also the default value if you omitted the TTL option.
         // So if the TTL is overwritten and is not equal to the default value, then add this option.
         // Otherwise if TTL is still equal to default, then it is not need to send this option.
-        if (TTL::DEFAULT_IN_SECONDS !== $options->getTTL()) {
-            $optionsPart['time_to_live'] = (string) $options->getTTL();
+        if (Options::DEFAULT_TTL_IN_SECONDS !== $options->getTimeToLive()) {
+            $optionsPart['time_to_live'] = (string) $options->getTimeToLive();
         }
 
         if (!empty($options->getRestrictedPackageName())) {
@@ -105,6 +99,10 @@ abstract class AbstractMessageBuilder implements MessageBuilderInterface
      */
     public function getMessage()
     {
-        return array_merge($this->targetPart, $this->optionsPart, $this->payloadPart);
+        return array_merge(
+            $this->targetPart,
+            $this->optionsPart,
+            $this->payloadPart
+        );
     }
 }
