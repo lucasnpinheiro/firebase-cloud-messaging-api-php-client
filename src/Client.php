@@ -59,6 +59,9 @@ class Client
 //        ]);
     }
 
+    /**
+     * @param EventDispatcherInterface|null $eventDispatcher
+     */
     public function setEventDispatcher(EventDispatcherInterface $eventDispatcher = null)
     {
         $this->eventDispatcher = $eventDispatcher;

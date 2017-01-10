@@ -10,17 +10,24 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Builder;
 
+use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\AndroidPayloadBuilder;
+use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\IosPayloadBuilder;
+use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\WebPayloadBuilder;
 use Fresh\FirebaseCloudMessaging\Message\Part\Options\Options;
 use Fresh\FirebaseCloudMessaging\Message\Part\Options\OptionsInterface;
 use Fresh\FirebaseCloudMessaging\Message\Part\Options\Priority;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AndroidNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\IosNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\WebNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadInterface;
 use Fresh\FirebaseCloudMessaging\Message\Part\Target;
 
 /**
- * AbstractMessageBuilder.
+ * MessageBuilder.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-abstract class AbstractMessageBuilder implements MessageBuilderInterface
+class MessageBuilder implements MessageBuilderInterface
 {
     /** @var array */
     protected $targetPart = [];
@@ -37,19 +44,13 @@ abstract class AbstractMessageBuilder implements MessageBuilderInterface
     public function buildTargetPart(Target\TargetInterface $target)
     {
         if ($target instanceof Target\ConditionTarget) {
-            $this->targetPart = [
-                'condition' => $target->getCondition(),
-            ];
+            $this->targetPart = ['condition' => $target->getCondition()];
         } elseif ($target instanceof Target\MulticastTarget) {
-            $this->targetPart = [
-                'registration_ids' => $target->getRegistrationTokens(),
-            ];
+            $this->targetPart = ['registration_ids' => $target->getRegistrationTokens()];
         } elseif ($target instanceof Target\SingleRecipientTarget) {
-            $this->targetPart = [
-                'to' => $target->getRegistrationToken(),
-            ];
+            $this->targetPart = ['to' => $target->getRegistrationToken()];
         } else {
-            throw new \Exception();
+            throw new \InvalidArgumentException('Unsupported target part');
         }
     }
 
@@ -61,13 +62,13 @@ abstract class AbstractMessageBuilder implements MessageBuilderInterface
         $optionsPart = [];
 
         if (!empty($options->getCollapseKey())) {
-            $optionsPart['collapse_key'] = $options->getCollapseKey();
+            $optionsPart['collapse_key'] = (string) $options->getCollapseKey();
         }
 
         // By default, messages are sent with normal priority.
         // If priority is different add it to the set of options.
-        if ($options->getPriority() !== Priority::NORMAL) {
-            $optionsPart['priority'] = $options->getPriority();
+        if (Priority::NORMAL !== $options->getPriority()) {
+            $optionsPart['priority'] = (string) $options->getPriority();
         }
 
         // By default `content_available` option is false. Adding it only if it was changed to true.
@@ -79,19 +80,37 @@ abstract class AbstractMessageBuilder implements MessageBuilderInterface
         // So if the TTL is overwritten and is not equal to the default value, then add this option.
         // Otherwise if TTL is still equal to default, then it is not need to send this option.
         if (Options::DEFAULT_TTL_IN_SECONDS !== $options->getTimeToLive()) {
-            $optionsPart['time_to_live'] = (string) $options->getTimeToLive();
+            $optionsPart['time_to_live'] = $options->getTimeToLive();
         }
 
         if (!empty($options->getRestrictedPackageName())) {
-            $optionsPart['restricted_package_name'] = $options->getRestrictedPackageName();
+            $optionsPart['restricted_package_name'] = (string) $options->getRestrictedPackageName();
         }
 
-        // By default `dry_run` option is....
+        // By default `dry_run` option is.... @todo
         if ($options->isDryRun()) {
             $optionsPart['dry_run'] = true;
         }
 
         $this->optionsPart = $optionsPart;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildPayloadPart(PayloadInterface $payload)
+    {
+        if ($payload instanceof AndroidNotificationPayload) {
+            $payloadBuilder = new AndroidPayloadBuilder($payload);
+        } elseif ($payload instanceof IosNotificationPayload) {
+            $payloadBuilder = new IosPayloadBuilder($payload);
+        } elseif ($payload instanceof WebNotificationPayload) {
+            $payloadBuilder = new WebPayloadBuilder($payload);
+        } else {
+            throw new \InvalidArgumentException('Unsupported payload part');
+        }
+
+        $this->payloadPart = $payloadBuilder->build()->getPayload();
     }
 
     /**

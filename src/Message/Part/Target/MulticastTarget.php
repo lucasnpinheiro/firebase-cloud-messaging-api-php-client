@@ -21,7 +21,7 @@ namespace Fresh\FirebaseCloudMessaging\Message\Part\Target;
  */
 class MulticastTarget implements TargetInterface
 {
-    /** @var array */
+    /** @var string[] */
     private $registrationTokens = [];
 
     /**
@@ -39,7 +39,7 @@ class MulticastTarget implements TargetInterface
     }
 
     /**
-     * @param array $registrationTokens
+     * @param string[] $registrationTokens
      *
      * @return MulticastTarget
      */
@@ -51,7 +51,7 @@ class MulticastTarget implements TargetInterface
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getRegistrationTokens()
     {

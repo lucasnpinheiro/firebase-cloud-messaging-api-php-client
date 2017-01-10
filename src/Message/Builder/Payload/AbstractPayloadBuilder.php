@@ -8,23 +8,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Message\Builder;
+namespace Fresh\FirebaseCloudMessaging\Message\Builder\Payload;
 
 /**
- * AndroidMessageBuilder.
+ * AbstractPayloadBuilder.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class AndroidMessageBuilder extends AbstractMessageBuilder
+abstract class AbstractPayloadBuilder implements PayloadBuilderInterface
 {
-    private $payloadParameters = [];
+    /** @var PayloadBuilderInterface */
+    protected $payload;
+
+    /** @var array */
+    protected $payloadPart;
 
     /**
      * {@inheritdoc}
      */
-    public function buildPayloadPart()
+    public function getPayload()
     {
-        // TODO: Implement buildPayload() method.
+        return $this->payloadPart;
     }
-
 }

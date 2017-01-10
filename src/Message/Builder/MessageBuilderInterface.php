@@ -23,11 +23,6 @@ use Fresh\FirebaseCloudMessaging\Message\Type\MessageInterface;
 interface MessageBuilderInterface
 {
     /**
-     * Create message.
-     */
-    public function createMessage();
-
-    /**
      * @param TargetInterface $target
      *
      * @throws \Exception

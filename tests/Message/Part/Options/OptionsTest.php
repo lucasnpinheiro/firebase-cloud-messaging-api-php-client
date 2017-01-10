@@ -24,7 +24,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     public function testObjectCreation()
     {
         $options = new Options();
-        $this->assertInstanceOf($options, OptionsInterface::class);
+        $this->assertInstanceOf(OptionsInterface::class, $options);
         $this->assertEmpty($options->getCollapseKey());
         $this->assertSame(Priority::NORMAL, $options->getPriority());
         $this->assertFalse($options->isContentAvailable());
