@@ -33,20 +33,20 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($options->isDryRun());
     }
 
-    public function setGetCollapseKey()
+    public function testSetGetCollapseKey()
     {
         $collapseKey = 'test';
         $options = (new Options())->setCollapseKey($collapseKey);
         $this->assertSame($collapseKey, $options->getCollapseKey());
     }
 
-    public function setGetPriority()
+    public function testSetGetPriority()
     {
         $options = (new Options())->setPriority(Priority::HIGH);
         $this->assertSame(Priority::HIGH, $options->getPriority());
     }
 
-    public function setIsContentAvailable()
+    public function testSetIsContentAvailable()
     {
         $options = (new Options())->setContentAvailable(true);
         $this->assertTrue($options->isContentAvailable());
@@ -54,21 +54,21 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($options->isContentAvailable());
     }
 
-    public function setGetTimeToLive()
+    public function testSetGetTimeToLive()
     {
         $ttl = 1234567890;
         $options = (new Options())->setTimeToLive($ttl);
         $this->assertSame($ttl, $options->getTimeToLive());
     }
 
-    public function setGetRestrictedPackageName()
+    public function testSetGetRestrictedPackageName()
     {
         $restrictedPackageName = 'test';
         $options = (new Options())->setRestrictedPackageName($restrictedPackageName);
         $this->assertSame($restrictedPackageName, $options->getRestrictedPackageName());
     }
 
-    public function setIsDryRun()
+    public function testSetIsDryRun()
     {
         $options = (new Options())->setDryRun(true);
         $this->assertTrue($options->isDryRun());
