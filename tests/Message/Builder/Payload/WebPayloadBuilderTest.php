@@ -74,7 +74,7 @@ class WebPayloadBuilderTest extends \PHPUnit_Framework_TestCase
         $builder->build();
         $expected = [
             'title' => 'hello world',
-            'body' => 'body'
+            'body' => 'body',
         ];
         $this->assertEquals($expected, $builder->getPayloadPart());
     }

@@ -53,9 +53,9 @@ class MessageBuilder
     }
 
     /**
-     * @return array
-     *
      * @throws \Exception
+     *
+     * @return array
      */
     public function getMessagePartsAsArray()
     {
@@ -83,9 +83,9 @@ class MessageBuilder
      *
      * Target and payload are required parts. Options can be omitted.
      *
-     * @return bool
-     *
      * @throws \RuntimeException
+     *
+     * @return bool
      */
     private function messageIsValid()
     {

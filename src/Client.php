@@ -86,12 +86,11 @@ class Client
             [
                 'headers' => [
                     'Authorization' => sprintf('key=%s', $this->serverKey),
-                    'Content-Type' => 'application/json'
+                    'Content-Type' => 'application/json',
                 ],
-                'body' => $this->messageBuilder->getMessageAsJson()
+                'body' => $this->messageBuilder->getMessageAsJson(),
             ]
         );
-
         // @todo Finish
     }
 }

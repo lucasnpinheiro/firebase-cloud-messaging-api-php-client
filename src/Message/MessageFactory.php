@@ -10,7 +10,9 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message;
 
-use Fresh\FirebaseCloudMessaging\Message\Type;
+use Fresh\FirebaseCloudMessaging\Message\Type\AndroidMessage;
+use Fresh\FirebaseCloudMessaging\Message\Type\IosMessage;
+use Fresh\FirebaseCloudMessaging\Message\Type\WebMessage;
 
 /**
  * Class MessageFactory.
@@ -20,26 +22,26 @@ use Fresh\FirebaseCloudMessaging\Message\Type;
 class MessageFactory
 {
     /**
-     * @return Type\WebMessage
+     * @return WebMessage
      */
     public static function createWebMessage()
     {
-        return new Type\WebMessage();
+        return new WebMessage();
     }
 
     /**
-     * @return Type\AndroidMessage
+     * @return AndroidMessage
      */
     public static function createAndroidMessage()
     {
-        return new Type\AndroidMessage();
+        return new AndroidMessage();
     }
 
     /**
-     * @return Type\IosMessage
+     * @return IosMessage
      */
     public static function createIosMessage()
     {
-        return new Type\IosMessage();
+        return new IosMessage();
     }
 }

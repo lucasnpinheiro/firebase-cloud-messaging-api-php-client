@@ -14,7 +14,6 @@ namespace Fresh\FirebaseCloudMessaging\Message\Part\Options;
  * Class Options.
  *
  * Set of options that can be used to change default behaviour of FCM notification.
- * @see https://firebase.google.com/docs/cloud-messaging/http-server-ref#collapse
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
