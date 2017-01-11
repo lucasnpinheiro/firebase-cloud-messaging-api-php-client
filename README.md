@@ -17,6 +17,9 @@ TODO
 * Dispatch events on different responses
 * Exceptions
 * More tests
+* Documentation
+
+---
 
 Supported platforms:
 * Android

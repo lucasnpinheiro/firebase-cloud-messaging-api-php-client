@@ -39,20 +39,27 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructor()
     {
-        $message = MessageFactory::createAndroidMessage()
-                    ->setTarget(
-                        TargetFactory::createSingleRecipientTarget()
-                            ->setRegistrationToken('token')
-                    )
-                    ->setOptions(
-                        OptionsFactory::createOptions()
-                            ->setPriority(Priority::HIGH)->setTimeToLive(123)
-                    )
-                    ->setPayload(PayloadFactory::createCombinedPayload()
-                        ->setDataPayload(PayloadFactory::createDataPayload()->setData(['yo' => 'wazzup']))
-                        ->setNotificationPayload(PayloadFactory::createNotificationIosPayload()->setTitle('hello')->setBody('world'))
-                    );
+        $target = TargetFactory::createSingleRecipientTarget()
+                               ->setRegistrationToken('token');
 
+        $options = OptionsFactory::createOptions()
+                                 ->setPriority(Priority::HIGH)
+                                 ->setTimeToLive(123);
+
+        $payload = PayloadFactory::createCombinedPayload()
+                                 ->setDataPayload(
+                                     PayloadFactory::createDataPayload()
+                                                   ->setData(['yo' => 'wazzup'])
+                                 )
+                                 ->setNotificationPayload(
+                                     PayloadFactory::createNotificationIosPayload()
+                                                   ->setTitle('hello')->setBody('world')
+                                 );
+
+        $message = MessageFactory::createAndroidMessage()
+                                 ->setTarget($target)
+                                 ->setOptions($options)
+                                 ->setPayload($payload);
 //        $this->client->sendMessage($message);
     }
 }

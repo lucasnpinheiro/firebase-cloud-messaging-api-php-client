@@ -13,9 +13,6 @@ namespace Fresh\FirebaseCloudMessaging\Message\Part\Target;
 /**
  * SingleRecipientTarget.
  *
- * Registration token is same as the registration ID. I just prefer to use word `token` in the public API instead of `ID`.
- * In the documentation of Firebase Cloud Messaging both words are used.
- *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class SingleRecipientTarget implements TargetInterface

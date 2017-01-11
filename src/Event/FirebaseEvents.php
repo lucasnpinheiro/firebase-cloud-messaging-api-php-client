@@ -18,12 +18,12 @@ namespace Fresh\FirebaseCloudMessaging\Event;
 final class FirebaseEvents
 {
     /**
-     * @see \Fresh\FirebaseCloudMessaging\Event\MulticastMessageResponseEvent Listeners receive an instance of this class
+     * @see \Fresh\FirebaseCloudMessaging\Event\MulticastMessageResponseEvent
      */
     const MULTICAST_MESSAGE_RESPONSE_EVENT = 'firebase.multicast_message_response';
 
     /**
-     * @see \Fresh\FirebaseCloudMessaging\Event\TopicMessageResponseEvent Listeners receive an instance of this class
+     * @see \Fresh\FirebaseCloudMessaging\Event\TopicMessageResponseEvent
      */
     const TOPIC_MESSAGE_RESPONSE_EVENT = 'firebase.topic_message_response';
 }
