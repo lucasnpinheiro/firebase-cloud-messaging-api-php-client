@@ -22,7 +22,8 @@ use Symfony\Component\EventDispatcher\Event;
 class TopicMessageResponseEvent extends Event
 {
     /**
-     * The topic message ID when FCM has successfully received the request and will attempt to deliver to all subscribed devices.
+     * The topic message ID when FCM has successfully received the request
+     * and will attempt to deliver to all subscribed devices.
      *
      * @var int
      */

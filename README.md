@@ -7,7 +7,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/fresh/firebase-cloud-messaging-api-php-client.svg?style=flat-square)](https://packagist.org/packages/fresh/firebase-cloud-messaging-api-php-client)
 [![Total Downloads](https://img.shields.io/packagist/dt/fresh/firebase-cloud-messaging-api-php-client.svg?style=flat-square)](https://packagist.org/packages/fresh/firebase-cloud-messaging-api-php-client)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/65aa6953-8bcc-431a-bf85-9bd2e8537a43.svg?style=flat-square)](https://insight.sensiolabs.com/projects/65aa6953-8bcc-431a-bf85-9bd2e8537a43)
-[![StyleCI](https://styleci.io/repos/15205247/shield?style=flat-square)](https://styleci.io/repos/15205247)
+[![StyleCI](https://styleci.io/repos/72565971/shield?style=flat-square)](https://styleci.io/repos/72565971)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg?style=flat-square)](https://gitter.im/fre5h/firebase-cloud-messaging-api-php-client)
 
 > Right now this client is in active development phase. Things can change unpredictably!
