@@ -62,6 +62,10 @@ class Client
         $this->guzzleHTTPClient = new GuzzleClient([
             'base_uri' => rtrim($this->endpoint, '/'),
             'timeout' => $guzzleTimeOut,
+            'headers' => [
+                'Authorization' => sprintf('key=%s', $this->serverKey),
+                'Content-Type' => 'application/json',
+            ],
         ]);
         $this->messageBuilder = new MessageBuilder();
     }
@@ -84,13 +88,12 @@ class Client
         $response = $this->guzzleHTTPClient->post(
             '',
             [
-                'headers' => [
-                    'Authorization' => sprintf('key=%s', $this->serverKey),
-                    'Content-Type' => 'application/json',
-                ],
                 'body' => $this->messageBuilder->getMessageAsJson(),
             ]
         );
+
+        echo $response->getStatusCode();
+        echo $response->getBody();
         // @todo Finish
     }
 }

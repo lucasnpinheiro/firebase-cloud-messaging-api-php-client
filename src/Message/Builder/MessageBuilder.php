@@ -16,7 +16,9 @@ use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\WebPayloadBuilder;
 use Fresh\FirebaseCloudMessaging\Message\Part\Options\Options;
 use Fresh\FirebaseCloudMessaging\Message\Part\Options\OptionsInterface;
 use Fresh\FirebaseCloudMessaging\Message\Part\Options\Priority;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Combined\CombinedPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\CommonPayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Data\DataPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AndroidNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\IosNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\WebNotificationPayload;
@@ -170,17 +172,25 @@ class MessageBuilder
     private function buildPayloadPart()
     {
         $payload = $this->message->getPayload();
+        $payloadKey = '';
 
         if ($payload instanceof AndroidNotificationPayload) {
+            $payloadKey = 'notification';
             $payloadBuilder = new AndroidPayloadBuilder($payload);
         } elseif ($payload instanceof IosNotificationPayload) {
+            $payloadKey = 'notification';
             $payloadBuilder = new IosPayloadBuilder($payload);
         } elseif ($payload instanceof WebNotificationPayload) {
+            $payloadKey = 'notification';
             $payloadBuilder = new WebPayloadBuilder($payload);
+        } elseif ($payload instanceof DataPayload) {
+            $payloadKey = 'data'; // @todo Finish
+        } elseif ($payload instanceof CombinedPayload) {
+            $payloadKey = 'data'; // @todo Finish
         } else {
             throw new \InvalidArgumentException('Unsupported payload part');
         }
 
-        $this->payloadPart = $payloadBuilder->build()->getPayloadPart();
+        $this->payloadPart = [$payloadKey => $payloadBuilder->build()->getPayloadPart()];
     }
 }
