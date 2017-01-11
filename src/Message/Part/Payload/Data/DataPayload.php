@@ -10,14 +10,16 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Data;
 
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\AndroidPayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\IosPayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\WebPayloadInterface;
 
 /**
  * DataPayload.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class DataPayload implements PayloadInterface
+class DataCommonPayload implements AndroidPayloadInterface, IosPayloadInterface, WebPayloadInterface
 {
     /** @var array */
     private $data = [];

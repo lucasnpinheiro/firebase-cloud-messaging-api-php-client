@@ -10,6 +10,8 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Type;
 
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\AndroidPayloadInterface;
+
 /**
  * AndroidMessage.
  *
@@ -17,4 +19,23 @@ namespace Fresh\FirebaseCloudMessaging\Message\Type;
  */
 class AndroidMessage extends AbstractMessage
 {
+    /**
+     * @param AndroidPayloadInterface $payload
+     *
+     * @return $this
+     */
+    public function setPayload(AndroidPayloadInterface $payload)
+    {
+        $this->payload = $payload;
+
+        return $this;
+    }
+
+    /**
+     * @return AndroidPayloadInterface
+     */
+    public function getPayload()
+    {
+        return $this->payload;
+    }
 }

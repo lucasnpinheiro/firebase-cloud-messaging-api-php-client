@@ -15,7 +15,7 @@ namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-abstract class AbstractMobileNotificationPayload extends AbstractNotificationPayload
+abstract class AbstractMobileNotificationPayload extends AbstractCommonNotificationPayload
 {
     /** @var string */
     private $sound;

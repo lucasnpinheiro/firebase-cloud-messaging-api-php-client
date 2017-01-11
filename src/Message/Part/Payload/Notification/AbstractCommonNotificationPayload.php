@@ -10,14 +10,14 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\CommonPayloadInterface;
 
 /**
- * AbstractNotificationPayload.
+ * AbstractCommonNotificationPayload.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-abstract class AbstractNotificationPayload implements PayloadInterface
+abstract class AbstractCommonNotificationPayload implements CommonPayloadInterface
 {
     /** @var string */
     private $title = '';

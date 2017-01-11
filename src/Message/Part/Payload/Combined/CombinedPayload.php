@@ -10,29 +10,31 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Combined;
 
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Data\DataPayload;
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AbstractNotificationPayload;
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\AndroidPayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Data\DataCommonPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\IosPayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AbstractCommonNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\WebPayloadInterface;
 
 /**
  * CombinedPayload.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class CombinedPayload implements PayloadInterface
+class CombinedCommonPayload implements AndroidPayloadInterface, IosPayloadInterface, WebPayloadInterface
 {
-    /** @var DataPayload */
+    /** @var DataCommonPayload */
     private $dataPayload;
 
-    /** @var AbstractNotificationPayload */
+    /** @var AbstractCommonNotificationPayload */
     private $notificationPayload;
 
     /**
-     * @param DataPayload $dataPayload
+     * @param DataCommonPayload $dataPayload
      *
-     * @return CombinedPayload
+     * @return CombinedCommonPayload
      */
-    public function setDataPayload(DataPayload $dataPayload)
+    public function setDataPayload(DataCommonPayload $dataPayload)
     {
         $this->dataPayload = $dataPayload;
 
@@ -40,7 +42,7 @@ class CombinedPayload implements PayloadInterface
     }
 
     /**
-     * @return DataPayload
+     * @return DataCommonPayload
      */
     public function getDataPayload()
     {
@@ -48,11 +50,11 @@ class CombinedPayload implements PayloadInterface
     }
 
     /**
-     * @param AbstractNotificationPayload $notificationPayload
+     * @param AbstractCommonNotificationPayload $notificationPayload
      *
-     * @return CombinedPayload
+     * @return CombinedCommonPayload
      */
-    public function setNotificationPayload(AbstractNotificationPayload $notificationPayload)
+    public function setNotificationPayload(AbstractCommonNotificationPayload $notificationPayload)
     {
         $this->notificationPayload = $notificationPayload;
 
@@ -60,7 +62,7 @@ class CombinedPayload implements PayloadInterface
     }
 
     /**
-     * @return AbstractNotificationPayload
+     * @return AbstractCommonNotificationPayload
      */
     public function getNotificationPayload()
     {

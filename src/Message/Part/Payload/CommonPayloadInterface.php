@@ -15,6 +15,6 @@ namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-interface PayloadInterface
+interface CommonPayloadInterface
 {
 }

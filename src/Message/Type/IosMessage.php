@@ -10,6 +10,8 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Type;
 
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\IosPayloadInterface;
+
 /**
  * IosMessage.
  *
@@ -17,4 +19,23 @@ namespace Fresh\FirebaseCloudMessaging\Message\Type;
  */
 class IosMessage extends AbstractMessage
 {
+    /**
+     * @param IosPayloadInterface $payload
+     *
+     * @return $this
+     */
+    public function setPayload(IosPayloadInterface $payload)
+    {
+        $this->payload = $payload;
+
+        return $this;
+    }
+
+    /**
+     * @return IosPayloadInterface
+     */
+    public function getPayload()
+    {
+        return $this->payload;
+    }
 }

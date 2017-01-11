@@ -11,7 +11,7 @@
 namespace Fresh\FirebaseCloudMessaging\Message\Type;
 
 use Fresh\FirebaseCloudMessaging\Message\Part\Options\OptionsInterface;
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\CommonPayloadInterface;
 use Fresh\FirebaseCloudMessaging\Message\Part\Target\TargetInterface;
 
 /**
@@ -27,7 +27,7 @@ abstract class AbstractMessage implements MessageInterface
     /** @var OptionsInterface */
     protected $options;
 
-    /** @var PayloadInterface */
+    /** @var CommonPayloadInterface */
     protected $payload;
 
     /**
@@ -66,15 +66,15 @@ abstract class AbstractMessage implements MessageInterface
         return $this->options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setPayload(PayloadInterface $payload)
-    {
-        $this->payload = $payload;
-
-        return $this;
-    }
+//    /**
+//     * {@inheritdoc}
+//     */
+//    public function setPayload(CommonPayloadInterface $payload)
+//    {
+//        $this->payload = $payload;
+//
+//        return $this;
+//    }
 
     /**
      * {@inheritdoc}
@@ -82,12 +82,5 @@ abstract class AbstractMessage implements MessageInterface
     public function getPayload()
     {
         return $this->payload;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBodyAsJson()
-    {
     }
 }

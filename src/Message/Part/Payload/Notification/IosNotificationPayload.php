@@ -10,12 +10,14 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\IosPayloadInterface;
+
 /**
  * IosNotificationPayload.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-final class IosNotificationPayload extends AbstractMobileNotificationPayload
+class IosNotificationPayload extends AbstractMobileNotificationPayload implements IosPayloadInterface
 {
     /** @var string */
     private $badge;

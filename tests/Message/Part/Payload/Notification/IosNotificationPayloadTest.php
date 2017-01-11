@@ -11,7 +11,7 @@
 namespace Tests\Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AbstractMobileNotificationPayload;
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AbstractNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AbstractCommonNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\IosNotificationPayload;
 
 /**
@@ -25,7 +25,7 @@ class IosNotificationPayloadTest extends \PHPUnit_Framework_TestCase
     {
         $iosNotificationPayload = new IosNotificationPayload();
         $this->assertInstanceOf(AbstractMobileNotificationPayload::class, $iosNotificationPayload);
-        $this->assertInstanceOf(AbstractNotificationPayload::class, $iosNotificationPayload);
+        $this->assertInstanceOf(AbstractCommonNotificationPayload::class, $iosNotificationPayload);
         $this->assertEmpty($iosNotificationPayload->getBadge());
         $this->assertEmpty($iosNotificationPayload->getBody());
         $this->assertEmpty($iosNotificationPayload->getBodyLocArgs());

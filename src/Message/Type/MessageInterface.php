@@ -11,7 +11,7 @@
 namespace Fresh\FirebaseCloudMessaging\Message\Type;
 
 use Fresh\FirebaseCloudMessaging\Message\Part\Options\OptionsInterface;
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadInterface;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\CommonPayloadInterface;
 use Fresh\FirebaseCloudMessaging\Message\Part\Target\TargetInterface;
 
 /**
@@ -45,20 +45,15 @@ interface MessageInterface
      */
     public function getOptions();
 
-    /**
-     * @param PayloadInterface $payload
-     *
-     * @return MessageInterface
-     */
-    public function setPayload(PayloadInterface $payload);
+//    /**
+//     * @param CommonPayloadInterface $payload
+//     *
+//     * @return MessageInterface
+//     */
+//    public function setPayload(CommonPayloadInterface $payload);
 
     /**
-     * @return PayloadInterface
+     * @return CommonPayloadInterface
      */
     public function getPayload();
-
-    /**
-     * @return string
-     */
-    public function getBodyAsJson();
 }

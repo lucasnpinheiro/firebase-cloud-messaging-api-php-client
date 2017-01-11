@@ -10,12 +10,14 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\WebPayloadInterface;
+
 /**
  * WebNotificationPayload.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-final class WebNotificationPayload extends AbstractNotificationPayload
+class WebNotificationPayload extends AbstractCommonNotificationPayload implements WebPayloadInterface
 {
     /** @var string */
     private $icon;

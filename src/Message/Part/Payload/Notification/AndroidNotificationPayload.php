@@ -10,12 +10,14 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\AndroidPayloadInterface;
+
 /**
  * AndroidNotificationPayload.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-final class AndroidNotificationPayload extends AbstractMobileNotificationPayload
+class AndroidNotificationPayload extends AbstractMobileNotificationPayload implements AndroidPayloadInterface
 {
     /** @var string */
     private $icon;
