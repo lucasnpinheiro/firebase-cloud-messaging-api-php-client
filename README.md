@@ -15,8 +15,11 @@
 TODO
 * Process response
 * Dispatch events on different responses
+* API for topic subscription
+* API for device group subscription
 * Exceptions
 * More tests
+* Describe features
 * Documentation
 
 ---
