@@ -12,8 +12,8 @@ namespace Fresh\FirebaseCloudMessaging;
 
 use Fresh\FirebaseCloudMessaging\Message\Builder\MessageBuilder;
 use Fresh\FirebaseCloudMessaging\Message\Type\AbstractMessage;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use GuzzleHttp\Client as GuzzleClient;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Client.

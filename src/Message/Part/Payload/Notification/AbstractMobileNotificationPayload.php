@@ -80,7 +80,7 @@ abstract class AbstractMobileNotificationPayload extends AbstractCommonNotificat
     public function setBodyLocArgs(array $bodyLocArgs)
     {
         foreach ($bodyLocArgs as &$bodyLocArg) {
-             $bodyLocArg = (string) $bodyLocArg;
+            $bodyLocArg = (string) $bodyLocArg;
         }
         $this->bodyLocArgs = $bodyLocArgs;
 

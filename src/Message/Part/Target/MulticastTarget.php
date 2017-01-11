@@ -15,6 +15,7 @@ namespace Fresh\FirebaseCloudMessaging\Message\Part\Target;
  *
  * Registration token is same as the registration ID. I just decided to use word `token` in the public API instead of `ID`.
  * In the documentation of Firebase Cloud Messaging both words are used.
+ *
  * @see https://firebase.google.com/docs/cloud-messaging/http-server-ref#table1
  *
  * @author Artem Genvald <genvaldartem@gmail.com>

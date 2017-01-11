@@ -11,8 +11,8 @@
 namespace Tests\Fresh\FirebaseCloudMessaging\Message\Builder\Payload;
 
 use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\AbstractPayloadBuilder;
-use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\WebPayloadBuilder;
 use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\PayloadBuilderInterface;
+use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\WebPayloadBuilder;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\WebNotificationPayload;
 
 /**
