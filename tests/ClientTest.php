@@ -53,6 +53,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                         ->setNotificationPayload(PayloadFactory::createNotificationIosPayload()->setTitle('hello')->setBody('world'))
                     );
 
-        $this->client->sendMessage($message);
+//        $this->client->sendMessage($message);
     }
 }

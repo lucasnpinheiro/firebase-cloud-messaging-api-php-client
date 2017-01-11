@@ -2,6 +2,12 @@
 
 > Right now this client is in active development phase. Things can change unpredictably!
 
+TODO
+* Process response
+* Dispatch events on different responses
+* Exceptions
+* More tests
+
 Supported platforms:
 * Android
 * iOS

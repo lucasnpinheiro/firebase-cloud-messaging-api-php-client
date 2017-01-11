@@ -80,6 +80,18 @@ class Client
     public function sendMessage(AbstractMessage $message)
     {
         $this->messageBuilder->setMessage($message);
-        $response = $this->guzzleHTTPClient->post('', $this->messageBuilder->getMessageAsJson());
+
+        $response = $this->guzzleHTTPClient->post(
+            '',
+            [
+                'headers' => [
+                    'Authorization' => sprintf('key=%s', $this->serverKey),
+                    'Content-Type' => 'application/json'
+                ],
+                'body' => $this->messageBuilder->getMessageAsJson()
+            ]
+        );
+
+        // @todo Finish
     }
 }

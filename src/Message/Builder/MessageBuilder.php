@@ -14,7 +14,9 @@ use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\AndroidPayloadBuilder;
 use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\IosPayloadBuilder;
 use Fresh\FirebaseCloudMessaging\Message\Builder\Payload\WebPayloadBuilder;
 use Fresh\FirebaseCloudMessaging\Message\Part\Options\Options;
+use Fresh\FirebaseCloudMessaging\Message\Part\Options\OptionsInterface;
 use Fresh\FirebaseCloudMessaging\Message\Part\Options\Priority;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\CommonPayloadInterface;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AndroidNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\IosNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\WebNotificationPayload;
@@ -51,19 +53,21 @@ class MessageBuilder
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
+     *
+     * @throws \Exception
      */
-    public function getMessageParts()
+    public function getMessagePartsAsArray()
     {
+        if (!$this->messageIsValid()) {
+            throw new \RuntimeException('Message is not valid');
+        }
+
         $this->buildTargetPart();
         $this->buildOptionsPart();
         $this->buildPayloadPart();
 
-        return array_merge(
-            $this->targetPart,
-            $this->optionsPart,
-            $this->payloadPart
-        );
+        return array_merge($this->targetPart, $this->optionsPart, $this->payloadPart);
     }
 
     /**
@@ -71,7 +75,33 @@ class MessageBuilder
      */
     public function getMessageAsJson()
     {
-        return json_encode($this->getMessageParts(), true);
+        return json_encode($this->getMessagePartsAsArray(), true);
+    }
+
+    /**
+     * Check if message is valid (has all required parts).
+     *
+     * Target and payload are required parts. Options can be omitted.
+     *
+     * @return bool
+     *
+     * @throws \RuntimeException
+     */
+    private function messageIsValid()
+    {
+        if (!$this->message instanceof AbstractMessage) {
+            throw new \RuntimeException(sprintf('Message is not instance of %s', AbstractMessage::class));
+        }
+
+        if (!$this->message->getTarget() instanceof Target\TargetInterface) {
+            throw new \RuntimeException(sprintf('Message target is not instance of %s', Target\TargetInterface::class));
+        }
+
+        if (!$this->message->getPayload() instanceof CommonPayloadInterface) {
+            throw new \RuntimeException(sprintf('Message target is not instance of %s', CommonPayloadInterface::class));
+        }
+
+        return true;
     }
 
     /**
@@ -97,38 +127,40 @@ class MessageBuilder
      */
     private function buildOptionsPart()
     {
-        $options = $this->message->getOptions();
-        $this->optionsPart = [];
+        if ($this->message instanceof AbstractMessage && $this->message->getOptions() instanceof OptionsInterface) {
+            $options = $this->message->getOptions();
+            $this->optionsPart = [];
 
-        if (!empty($options->getCollapseKey())) {
-            $this->optionsPart['collapse_key'] = (string) $options->getCollapseKey();
-        }
+            if (!empty($options->getCollapseKey())) {
+                $this->optionsPart['collapse_key'] = (string) $options->getCollapseKey();
+            }
 
-        // By default, messages are sent with normal priority.
-        // If priority is different add it to the set of options.
-        if (Priority::NORMAL !== $options->getPriority()) {
-            $this->optionsPart['priority'] = (string) $options->getPriority();
-        }
+            // By default, messages are sent with normal priority.
+            // If priority is different add it to the set of options.
+            if (Priority::NORMAL !== $options->getPriority()) {
+                $this->optionsPart['priority'] = (string) $options->getPriority();
+            }
 
-        // By default `content_available` option is false. Adding it only if it was changed to true.
-        if ($options->isContentAvailable()) {
-            $this->optionsPart['content_available'] = true;
-        }
+            // By default `content_available` option is false. Adding it only if it was changed to true.
+            if ($options->isContentAvailable()) {
+                $this->optionsPart['content_available'] = true;
+            }
 
-        // By default TTL for message in FCM is 4 weeks, it is also the default value if you omitted the TTL option.
-        // So if the TTL is overwritten and is not equal to the default value, then add this option.
-        // Otherwise if TTL is still equal to default, then it is not need to send this option.
-        if (Options::DEFAULT_TTL_IN_SECONDS !== $options->getTimeToLive()) {
-            $this->optionsPart['time_to_live'] = $options->getTimeToLive();
-        }
+            // By default TTL for message in FCM is 4 weeks, it is also the default value if you omitted the TTL option.
+            // So if the TTL is overwritten and is not equal to the default value, then add this option.
+            // Otherwise if TTL is still equal to default, then it is not need to send this option.
+            if (Options::DEFAULT_TTL_IN_SECONDS !== $options->getTimeToLive()) {
+                $this->optionsPart['time_to_live'] = $options->getTimeToLive();
+            }
 
-        if (!empty($options->getRestrictedPackageName())) {
-            $this->optionsPart['restricted_package_name'] = (string) $options->getRestrictedPackageName();
-        }
+            if (!empty($options->getRestrictedPackageName())) {
+                $this->optionsPart['restricted_package_name'] = (string) $options->getRestrictedPackageName();
+            }
 
-        // By default `dry_run` option is.... @todo
-        if ($options->isDryRun()) {
-            $this->optionsPart['dry_run'] = true;
+            // By default `dry_run` option is.... @todo
+            if ($options->isDryRun()) {
+                $this->optionsPart['dry_run'] = true;
+            }
         }
     }
 
