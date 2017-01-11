@@ -21,12 +21,12 @@ abstract class AbstractPayloadBuilder implements PayloadBuilderInterface
     protected $payload;
 
     /** @var array */
-    protected $payloadPart;
+    protected $payloadPart = [];
 
     /**
      * {@inheritdoc}
      */
-    public function getPayload()
+    public function getPayloadPart()
     {
         return $this->payloadPart;
     }

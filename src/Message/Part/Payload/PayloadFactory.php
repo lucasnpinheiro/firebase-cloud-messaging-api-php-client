@@ -10,8 +10,8 @@
 
 namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload;
 
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Combined\CombinedCommonPayload;
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Data\DataCommonPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Combined\CombinedPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Data\DataPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AndroidNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\IosNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\WebNotificationPayload;
@@ -24,19 +24,19 @@ use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\WebNotificati
 class PayloadFactory
 {
     /**
-     * @return CombinedCommonPayload
+     * @return CombinedPayload
      */
     public static function createCombinedPayload()
     {
-        return new CombinedCommonPayload();
+        return new CombinedPayload();
     }
 
     /**
-     * @return DataCommonPayload
+     * @return DataPayload
      */
     public static function createDataPayload()
     {
-        return new DataCommonPayload();
+        return new DataPayload();
     }
 
     /**

@@ -1,5 +1,7 @@
 # Firebase Cloud Messaging API PHP Client
 
+> Right now this client is in active development phase. Things can change unpredictably!
+
 Supported platforms:
 * Android
 * iOS

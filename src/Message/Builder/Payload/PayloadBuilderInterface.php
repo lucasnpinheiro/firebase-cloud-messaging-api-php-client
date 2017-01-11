@@ -22,5 +22,5 @@ interface PayloadBuilderInterface
     /**
      * @return array
      */
-    public function getPayload();
+    public function getPayloadPart();
 }

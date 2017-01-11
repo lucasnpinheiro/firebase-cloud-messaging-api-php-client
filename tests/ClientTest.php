@@ -12,8 +12,9 @@ namespace Tests\Fresh\FirebaseCloudMessaging;
 
 use Fresh\FirebaseCloudMessaging\Client;
 use Fresh\FirebaseCloudMessaging\Message\MessageFactory;
-use Fresh\FirebaseCloudMessaging\Message\Part\Options\Options;
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AndroidNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Options\OptionsFactory;
+use Fresh\FirebaseCloudMessaging\Message\Part\Options\Priority;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\PayloadFactory;
 use Fresh\FirebaseCloudMessaging\Message\Part\Target\TargetFactory;
 
 /**
@@ -23,21 +24,35 @@ use Fresh\FirebaseCloudMessaging\Message\Part\Target\TargetFactory;
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Client */
+    private $client;
+
+    protected function setUp()
+    {
+        $this->client = new Client(1234567890, 'server key');
+    }
+
+    protected function tearDown()
+    {
+        unset($this->client);
+    }
+
     public function testConstructor()
     {
-        $client = new Client(1234567890, 'server key');
-
-        $androidPayload = (new AndroidNotificationPayload())
-            ->setTitle('sdfs')
-            ->setTag('');
-
-        $options = (new Options())->setTimeToLive(123);
-
         $message = MessageFactory::createAndroidMessage()
-                                 ->setTarget(TargetFactory::createMulticastTarget()->addRegistrationToken('yo'))
-                                 ->setOptions($options)
-                                 ->setPayload($androidPayload);
+                    ->setTarget(
+                        TargetFactory::createSingleRecipientTarget()
+                            ->setRegistrationToken('token')
+                    )
+                    ->setOptions(
+                        OptionsFactory::createOptions()
+                            ->setPriority(Priority::HIGH)->setTimeToLive(123)
+                    )
+                    ->setPayload(PayloadFactory::createCombinedPayload()
+                        ->setDataPayload(PayloadFactory::createDataPayload()->setData(['yo' => 'wazzup']))
+                        ->setNotificationPayload(PayloadFactory::createNotificationIosPayload()->setTitle('hello')->setBody('world'))
+                    );
 
-        $client->sendMessage($message);
+        $this->client->sendMessage($message);
     }
 }

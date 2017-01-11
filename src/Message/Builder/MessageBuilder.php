@@ -19,7 +19,7 @@ use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AndroidNotifi
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\IosNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\WebNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Target;
-use Fresh\FirebaseCloudMessaging\Message\Type\MessageInterface;
+use Fresh\FirebaseCloudMessaging\Message\Type\AbstractMessage;
 
 /**
  * MessageBuilder.
@@ -30,7 +30,7 @@ use Fresh\FirebaseCloudMessaging\Message\Type\MessageInterface;
  */
 class MessageBuilder
 {
-    /** @var MessageInterface */
+    /** @var AbstractMessage */
     private $message;
 
     /** @var array */
@@ -43,9 +43,9 @@ class MessageBuilder
     private $payloadPart = [];
 
     /**
-     * @param MessageInterface $message
+     * @param AbstractMessage $message
      */
-    public function setMessage($message)
+    public function setMessage(AbstractMessage $message)
     {
         $this->message = $message;
     }
@@ -149,6 +149,6 @@ class MessageBuilder
             throw new \InvalidArgumentException('Unsupported payload part');
         }
 
-        $this->payloadPart = $payloadBuilder->build()->getPayload();
+        $this->payloadPart = $payloadBuilder->build()->getPayloadPart();
     }
 }

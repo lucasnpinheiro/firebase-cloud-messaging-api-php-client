@@ -32,44 +32,44 @@ class IosPayloadBuilder extends AbstractPayloadBuilder
      */
     public function build()
     {
-        $payloadPart = [];
+        $this->payloadPart = [];
 
         if (!empty($this->payload->getTitle())) {
-            $payloadPart['title'] = (string) $this->payload->getTitle();
+            $this->payloadPart['title'] = (string) $this->payload->getTitle();
         }
 
         if (!empty($this->payload->getBody())) {
-            $payloadPart['body'] = (string) $this->payload->getBody();
+            $this->payloadPart['body'] = (string) $this->payload->getBody();
         }
 
         if (!empty($this->payload->getSound())) {
-            $payloadPart['sound'] = (string) $this->payload->getSound();
+            $this->payloadPart['sound'] = (string) $this->payload->getSound();
         }
 
         if (!empty($this->payload->getBadge())) {
-            $payloadPart['badge'] = (string) $this->payload->getBadge();
+            $this->payloadPart['badge'] = (string) $this->payload->getBadge();
         }
 
         if (!empty($this->payload->getClickAction())) {
-            $payloadPart['click_action'] = (string) $this->payload->getClickAction();
+            $this->payloadPart['click_action'] = (string) $this->payload->getClickAction();
         }
 
         if (!empty($this->payload->getBodyLocKey())) {
-            $payloadPart['body_loc_key'] = (string) $this->payload->getBodyLocKey();
+            $this->payloadPart['body_loc_key'] = (string) $this->payload->getBodyLocKey();
         }
 
         if (!empty($this->payload->getBodyLocArgs())) {
-            $payloadPart['body_loc_args'] = (array) $this->payload->getBodyLocArgs();
+            $this->payloadPart['body_loc_args'] = (array) $this->payload->getBodyLocArgs();
         }
 
         if (!empty($this->payload->getTitleLocKey())) {
-            $payloadPart['title_loc_key'] = (string) $this->payload->getTitleLocKey();
+            $this->payloadPart['title_loc_key'] = (string) $this->payload->getTitleLocKey();
         }
 
         if (!empty($this->payload->getTitleLocArgs())) {
-            $payloadPart['title_loc_args'] = (array) $this->payload->getTitleLocArgs();
+            $this->payloadPart['title_loc_args'] = (array) $this->payload->getTitleLocArgs();
         }
 
-        return $payloadPart;
+        return $this;
     }
 }

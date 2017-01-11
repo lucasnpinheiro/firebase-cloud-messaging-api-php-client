@@ -22,10 +22,14 @@ class ConditionTarget implements TargetInterface
 
     /**
      * @param string $condition
+     *
+     * @return $this
      */
     public function setCondition($condition)
     {
         $this->condition = $condition;
+
+        return $this;
     }
 
     /**

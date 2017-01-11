@@ -10,8 +10,7 @@
 
 namespace Tests\Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AbstractMobileNotificationPayload;
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AbstractCommonNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\AndroidPayloadInterface;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AndroidNotificationPayload;
 
 /**
@@ -24,8 +23,7 @@ class AndroidNotificationPayloadTest extends \PHPUnit_Framework_TestCase
     public function testObjectCreation()
     {
         $androidNotificationPayload = new AndroidNotificationPayload();
-        $this->assertInstanceOf(AbstractMobileNotificationPayload::class, $androidNotificationPayload);
-        $this->assertInstanceOf(AbstractCommonNotificationPayload::class, $androidNotificationPayload);
+        $this->assertInstanceOf(AndroidPayloadInterface::class, $androidNotificationPayload);
         $this->assertEmpty($androidNotificationPayload->getBody());
         $this->assertEmpty($androidNotificationPayload->getBodyLocArgs());
         $this->assertEmpty($androidNotificationPayload->getBodyLocKey());

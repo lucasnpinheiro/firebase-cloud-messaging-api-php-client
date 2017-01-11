@@ -10,23 +10,20 @@
 
 namespace Fresh\FirebaseCloudMessaging;
 
-use Fresh\FirebaseCloudMessaging\Message\Type\MessageInterface;
+use Fresh\FirebaseCloudMessaging\Message\Builder\MessageBuilder;
+use Fresh\FirebaseCloudMessaging\Message\Type\AbstractMessage;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-
-//use GuzzleHttp\Client;
-//use GuzzleHttp\Exception\ClientException;
-//use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client as GuzzleClient;
 
 /**
  * Client.
- *
- * @see https://firebase.google.com/docs/cloud-messaging/
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
 class Client
 {
     const DEFAULT_ENDPOINT = 'https://fcm.googleapis.com/fcm/send';
+    const DEFAULT_GUZZLE_TIMEOUT = 50;
 
     /** @var string */
     private $endpoint;
@@ -43,20 +40,30 @@ class Client
     /** @var Client */
     private $guzzleHTTPClient;
 
+    /** @var MessageBuilder */
+    private $messageBuilder;
+
     /**
      * @param int    $messagingSenderId
      * @param string $serverKey
      * @param string $endpoint
+     * @param int    $guzzleTimeOut
      */
-    public function __construct($messagingSenderId, $serverKey, $endpoint = self::DEFAULT_ENDPOINT)
-    {
+    public function __construct(
+        $messagingSenderId,
+        $serverKey,
+        $endpoint = self::DEFAULT_ENDPOINT,
+        $guzzleTimeOut = self::DEFAULT_GUZZLE_TIMEOUT
+    ) {
         $this->messagingSenderId = $messagingSenderId;
         $this->serverKey = $serverKey;
         $this->endpoint = $endpoint;
 
-//        $this->guzzleHTTPClient = new Client([
-//            'base_uri' => rtrim($this->host, '/'),
-//        ]);
+        $this->guzzleHTTPClient = new GuzzleClient([
+            'base_uri' => rtrim($this->endpoint, '/'),
+            'timeout' => $guzzleTimeOut,
+        ]);
+        $this->messageBuilder = new MessageBuilder();
     }
 
     /**
@@ -67,9 +74,12 @@ class Client
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function sendMessage(MessageInterface $message)
+    /**
+     * @param AbstractMessage $message
+     */
+    public function sendMessage(AbstractMessage $message)
     {
-//        $response = $this->guzzleHTTPClient->post($uri, $body);
-//        $message->build();
+        $this->messageBuilder->setMessage($message);
+        $response = $this->guzzleHTTPClient->post('', $this->messageBuilder->getMessageAsJson());
     }
 }

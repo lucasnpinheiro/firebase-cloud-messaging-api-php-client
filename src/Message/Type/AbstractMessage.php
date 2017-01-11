@@ -19,7 +19,7 @@ use Fresh\FirebaseCloudMessaging\Message\Part\Target\TargetInterface;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-abstract class AbstractMessage implements MessageInterface
+abstract class AbstractMessage
 {
     /** @var TargetInterface */
     protected $target;
@@ -31,7 +31,9 @@ abstract class AbstractMessage implements MessageInterface
     protected $payload;
 
     /**
-     * {@inheritdoc}
+     * @param TargetInterface $target
+     *
+     * @return $this
      */
     public function setTarget(TargetInterface $target)
     {
@@ -41,7 +43,7 @@ abstract class AbstractMessage implements MessageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return TargetInterface
      */
     public function getTarget()
     {
@@ -49,7 +51,9 @@ abstract class AbstractMessage implements MessageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param OptionsInterface $options
+     *
+     * @return $this
      */
     public function setOptions(OptionsInterface $options)
     {
@@ -59,28 +63,15 @@ abstract class AbstractMessage implements MessageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return OptionsInterface
      */
     public function getOptions()
     {
         return $this->options;
     }
 
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function setPayload(CommonPayloadInterface $payload)
-//    {
-//        $this->payload = $payload;
-//
-//        return $this;
-//    }
-
     /**
-     * {@inheritdoc}
+     * @return CommonPayloadInterface
      */
-    public function getPayload()
-    {
-        return $this->payload;
-    }
+    abstract public function getPayload();
 }

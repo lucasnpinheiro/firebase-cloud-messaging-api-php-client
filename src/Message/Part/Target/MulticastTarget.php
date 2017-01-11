@@ -45,7 +45,9 @@ class MulticastTarget implements TargetInterface
      */
     public function setRegistrationTokens(array $registrationTokens)
     {
-        $this->registrationTokens = $registrationTokens;
+        foreach ($registrationTokens as $registrationToken) {
+            $this->addRegistrationToken($registrationToken);
+        }
 
         return $this;
     }

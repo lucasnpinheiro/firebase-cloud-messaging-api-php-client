@@ -25,10 +25,14 @@ class SingleRecipientTarget implements TargetInterface
 
     /**
      * @param string $registrationToken
+     *
+     * @return $this
      */
     public function setRegistrationToken($registrationToken)
     {
         $this->registrationToken = $registrationToken;
+
+        return $this;
     }
 
     /**

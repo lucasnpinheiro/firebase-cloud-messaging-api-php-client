@@ -32,24 +32,24 @@ class WebPayloadBuilder extends AbstractPayloadBuilder
      */
     public function build()
     {
-        $payloadPart = [];
+        $this->payloadPart = [];
 
         if (!empty($this->payload->getTitle())) {
-            $payloadPart['title'] = (string) $this->payload->getTitle();
+            $this->payloadPart['title'] = (string) $this->payload->getTitle();
         }
 
         if (!empty($this->payload->getBody())) {
-            $payloadPart['body'] = (string) $this->payload->getBody();
+            $this->payloadPart['body'] = (string) $this->payload->getBody();
         }
 
         if (!empty($this->payload->getIcon())) {
-            $payloadPart['icon'] = (string) $this->payload->getIcon();
+            $this->payloadPart['icon'] = (string) $this->payload->getIcon();
         }
 
         if (!empty($this->payload->getClickAction())) {
-            $payloadPart['click_action'] = (string) $this->payload->getClickAction();
+            $this->payloadPart['click_action'] = (string) $this->payload->getClickAction();
         }
 
-        return $payloadPart;
+        return $this;
     }
 }

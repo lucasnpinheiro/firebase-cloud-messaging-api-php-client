@@ -11,7 +11,7 @@
 namespace Fresh\FirebaseCloudMessaging\Message\Part\Payload\Combined;
 
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\AndroidPayloadInterface;
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Data\DataCommonPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Data\DataPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\IosPayloadInterface;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AbstractCommonNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\WebPayloadInterface;
@@ -21,20 +21,20 @@ use Fresh\FirebaseCloudMessaging\Message\Part\Payload\WebPayloadInterface;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class CombinedCommonPayload implements AndroidPayloadInterface, IosPayloadInterface, WebPayloadInterface
+class CombinedPayload implements AndroidPayloadInterface, IosPayloadInterface, WebPayloadInterface
 {
-    /** @var DataCommonPayload */
+    /** @var DataPayload */
     private $dataPayload;
 
     /** @var AbstractCommonNotificationPayload */
     private $notificationPayload;
 
     /**
-     * @param DataCommonPayload $dataPayload
+     * @param DataPayload $dataPayload
      *
-     * @return CombinedCommonPayload
+     * @return $this
      */
-    public function setDataPayload(DataCommonPayload $dataPayload)
+    public function setDataPayload(DataPayload $dataPayload)
     {
         $this->dataPayload = $dataPayload;
 
@@ -42,7 +42,7 @@ class CombinedCommonPayload implements AndroidPayloadInterface, IosPayloadInterf
     }
 
     /**
-     * @return DataCommonPayload
+     * @return DataPayload
      */
     public function getDataPayload()
     {
@@ -52,7 +52,7 @@ class CombinedCommonPayload implements AndroidPayloadInterface, IosPayloadInterf
     /**
      * @param AbstractCommonNotificationPayload $notificationPayload
      *
-     * @return CombinedCommonPayload
+     * @return $this
      */
     public function setNotificationPayload(AbstractCommonNotificationPayload $notificationPayload)
     {

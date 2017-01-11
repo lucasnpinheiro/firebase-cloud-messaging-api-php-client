@@ -19,17 +19,21 @@ use Fresh\FirebaseCloudMessaging\Message\Part\Payload\WebPayloadInterface;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class DataCommonPayload implements AndroidPayloadInterface, IosPayloadInterface, WebPayloadInterface
+class DataPayload implements AndroidPayloadInterface, IosPayloadInterface, WebPayloadInterface
 {
     /** @var array */
     private $data = [];
 
     /**
      * @param array $data
+     *
+     * @return $this
      */
     public function setData(array $data)
     {
         $this->data = $data;
+
+        return $this;
     }
 
     /**

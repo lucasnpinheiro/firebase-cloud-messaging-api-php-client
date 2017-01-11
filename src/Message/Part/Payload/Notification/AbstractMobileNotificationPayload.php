@@ -79,6 +79,9 @@ abstract class AbstractMobileNotificationPayload extends AbstractCommonNotificat
      */
     public function setBodyLocArgs(array $bodyLocArgs)
     {
+        foreach ($bodyLocArgs as &$bodyLocArg) {
+             $bodyLocArg = (string) $bodyLocArg;
+        }
         $this->bodyLocArgs = $bodyLocArgs;
 
         return $this;
@@ -119,6 +122,9 @@ abstract class AbstractMobileNotificationPayload extends AbstractCommonNotificat
      */
     public function setTitleLocArgs(array $titleLocArgs)
     {
+        foreach ($titleLocArgs as &$titleLocArg) {
+            $titleLocArg = (string) $titleLocArg;
+        }
         $this->titleLocArgs = $titleLocArgs;
 
         return $this;

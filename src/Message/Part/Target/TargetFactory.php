@@ -18,7 +18,7 @@ namespace Fresh\FirebaseCloudMessaging\Message\Part\Target;
 class TargetFactory
 {
     /**
-     * Create... TODO
+     * @todo Find better name for method and class
      *
      * @return SingleRecipientTarget
      */
@@ -28,8 +28,6 @@ class TargetFactory
     }
 
     /**
-     * Create a target to send a message to more than 1 registration token.
-     *
      * @return MulticastTarget
      */
     public static function createMulticastTarget()
@@ -38,10 +36,6 @@ class TargetFactory
     }
 
     /**
-     * Create a target to send a message to more than 1 registration token.
-     *
-     * This parameter specifies a logical expression of conditions that determine the message target.
-     *
      * @return ConditionTarget
      */
     public static function createConditionTarget()

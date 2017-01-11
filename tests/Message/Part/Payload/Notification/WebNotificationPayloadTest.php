@@ -10,8 +10,8 @@
 
 namespace Tests\Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification;
 
-use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\AbstractCommonNotificationPayload;
 use Fresh\FirebaseCloudMessaging\Message\Part\Payload\Notification\WebNotificationPayload;
+use Fresh\FirebaseCloudMessaging\Message\Part\Payload\WebPayloadInterface;
 
 /**
  * WebNotificationPayloadTest.
@@ -23,7 +23,7 @@ class WebNotificationPayloadTest extends \PHPUnit_Framework_TestCase
     public function testObjectCreation()
     {
         $webNotificationPayload = new WebNotificationPayload();
-        $this->assertInstanceOf(AbstractCommonNotificationPayload::class, $webNotificationPayload);
+        $this->assertInstanceOf(WebPayloadInterface::class, $webNotificationPayload);
         $this->assertEmpty($webNotificationPayload->getBody());
         $this->assertEmpty($webNotificationPayload->getClickAction());
         $this->assertEmpty($webNotificationPayload->getIcon());
