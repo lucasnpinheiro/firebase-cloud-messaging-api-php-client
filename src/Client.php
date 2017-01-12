@@ -12,6 +12,7 @@ namespace Fresh\FirebaseCloudMessaging;
 
 use Fresh\FirebaseCloudMessaging\Message\Builder\MessageBuilder;
 use Fresh\FirebaseCloudMessaging\Message\Type\AbstractMessage;
+use Fresh\FirebaseCloudMessaging\Response\ResponseProcessor;
 use GuzzleHttp\Client as GuzzleClient;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -43,6 +44,9 @@ class Client
     /** @var MessageBuilder */
     private $messageBuilder;
 
+    /** @var ResponseProcessor */
+    private $responseProcessor;
+
     /**
      * @param int    $messagingSenderId
      * @param string $serverKey
@@ -59,6 +63,9 @@ class Client
         $this->serverKey = $serverKey;
         $this->endpoint = $endpoint;
 
+        $this->messageBuilder = new MessageBuilder();
+        $this->responseProcessor = new ResponseProcessor();
+
         $this->guzzleHTTPClient = new GuzzleClient([
             'base_uri' => rtrim($this->endpoint, '/'),
             'timeout' => $guzzleTimeOut,
@@ -67,7 +74,6 @@ class Client
                 'Content-Type' => 'application/json',
             ],
         ]);
-        $this->messageBuilder = new MessageBuilder();
     }
 
     /**
@@ -92,8 +98,6 @@ class Client
             ]
         );
 
-        echo $response->getStatusCode();
-        echo $response->getBody();
-        // @todo Finish
+        return $this->responseProcessor->processResponse($response);
     }
 }
