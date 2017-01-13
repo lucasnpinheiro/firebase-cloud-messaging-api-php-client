@@ -13,18 +13,20 @@
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg?style=flat-square)](https://gitter.im/fre5h/firebase-cloud-messaging-api-php-client)
 
 TODO
-* Process response
-* Dispatch events on different responses
-* API for topic subscription
-* API for device group subscription
-* Exceptions
-* More tests
-* Describe features
-* Documentation
+
+[ ] Process response
+[ ] Dispatch events on different responses
+[ ] API for topic subscription
+[ ] API for device group subscription
+[ ] Exceptions
+[ ] More tests
+[ ] Describe features
+[ ] Documentation
 
 ---
 
 Supported platforms:
+
 * Android
 * iOS
 * Chrome web browser
