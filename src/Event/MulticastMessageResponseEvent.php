@@ -10,6 +10,12 @@
 
 namespace Fresh\FirebaseCloudMessaging\Event;
 
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\CanonicalTokenMessageResult;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection\CanonicalTokenMessageResultCollection;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection\FailureMessageResultCollection;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection\SuccessMessageResultCollection;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\FailureMessageResult;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\SuccessMessageResult;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -21,59 +27,34 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class MulticastMessageResponseEvent extends Event
 {
-    /**
-     * Unique ID (number) identifying the multicast message.
-     *
-     * @var int
-     */
+    /** @var int */
     private $multicastId;
 
-    /**
-     * Number of messages that were processed without an error.
-     *
-     * @var int
-     */
-    private $numberOfSuccessMessages;
+    /** @var SuccessMessageResultCollection */
+    private $successMessageResults;
+
+    /** @var FailureMessageResultCollection */
+    private $failureMessageResults;
+
+    /** @var CanonicalTokenMessageResultCollection */
+    private $canonicalTokenMessageResults;
 
     /**
-     * Number of messages that could not be processed.
-     *
-     * @var int
+     * @param int                                   $multicastId
+     * @param SuccessMessageResultCollection        $successMessageResults
+     * @param FailureMessageResultCollection        $failureMessageResults
+     * @param CanonicalTokenMessageResultCollection $canonicalTokenMessageResults
      */
-    private $numberOfFailedMessages;
-
-    /**
-     * Number of results that contain a canonical registration token.
-     * A canonical registration ID is the registration token of the last registration requested by the client app.
-     * This is the ID that the server should use when sending messages to the device.
-     *
-     * @var int
-     */
-    private $numberOfMessagesWithCanonicalRegistrationToken;
-
-    /**
-     * Array of objects representing the status of the messages processed.
-     * The objects are listed in the same order as the request
-     * (i.e., for each registration ID in the request, its result is listed in the same index in the response).
-     *
-     * @var array
-     */
-    private $results;
-
-    /**
-     * @param int   $multicastId
-     * @param int   $success
-     * @param int   $failure
-     * @param int   $canonicalIds
-     * @param array $results
-     */
-    public function __construct($multicastId, $success, $failure, $canonicalIds, array $results)
-    {
+    public function __construct(
+        $multicastId,
+        SuccessMessageResultCollection $successMessageResults,
+        FailureMessageResultCollection $failureMessageResults,
+        CanonicalTokenMessageResultCollection $canonicalTokenMessageResults
+    ) {
         $this->multicastId = $multicastId;
-        $this->numberOfSuccessMessages = $success;
-        $this->numberOfFailedMessages = $failure;
-        $this->numberOfMessagesWithCanonicalRegistrationToken = $canonicalIds;
-        $this->results = $results;
+        $this->successMessageResults = $successMessageResults;
+        $this->failureMessageResults = $failureMessageResults;
+        $this->canonicalTokenMessageResults = $canonicalTokenMessageResults;
     }
 
     /**
@@ -85,34 +66,26 @@ class MulticastMessageResponseEvent extends Event
     }
 
     /**
-     * @return int
+     * @return SuccessMessageResultCollection|SuccessMessageResult[]
      */
-    public function getNumberOfSuccessMessages()
+    public function getSuccessMessageResults()
     {
-        return $this->numberOfSuccessMessages;
+        return $this->successMessageResults;
     }
 
     /**
-     * @return int
+     * @return FailureMessageResultCollection|FailureMessageResult[]
      */
-    public function getNumberOfFailedMessages()
+    public function getFailureMessageResults()
     {
-        return $this->numberOfFailedMessages;
+        return $this->failureMessageResults;
     }
 
     /**
-     * @return int
+     * @return CanonicalTokenMessageResultCollection|CanonicalTokenMessageResult[]
      */
-    public function getNumberOfMessagesWithCanonicalRegistrationToken()
+    public function getCanonicalTokenMessageResults()
     {
-        return $this->numberOfMessagesWithCanonicalRegistrationToken;
-    }
-
-    /**
-     * @return array
-     */
-    public function getResults()
-    {
-        return $this->results;
+        return $this->canonicalTokenMessageResults;
     }
 }

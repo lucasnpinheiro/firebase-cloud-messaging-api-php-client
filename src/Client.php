@@ -73,6 +73,7 @@ class Client
         $this->guzzleHTTPClient = new GuzzleClient([
             'base_uri' => rtrim($this->endpoint, '/'),
             'timeout' => $guzzleTimeOut,
+            'http_errors' => false,
             'headers' => [
                 'Authorization' => sprintf('key=%s', $this->serverKey),
                 'Content-Type' => 'application/json',
@@ -102,9 +103,10 @@ class Client
             ['body' => $this->messageBuilder->getMessageAsJson()]
         );
 
-        $this->dispatchEvent($message, $response);
+        $processedResponse = $this->responseProcessor->processResponse($response);
+        $this->dispatchEvent($message, $processedResponse);
 
-        return $this->responseProcessor->processResponse($response);
+        return $processedResponse;
     }
 
     /**
@@ -121,8 +123,7 @@ class Client
                         $response->getMulticastId(),
                         $response->getNumberOfSuccessMessages(),
                         $response->getNumberOfFailedMessages(),
-                        $response->getNumberOfMessagesWithCanonicalRegistrationToken(),
-                        $response->getResults()
+                        $response->getNumberOfMessagesWithCanonicalRegistrationToken()
                     )
                 );
             }

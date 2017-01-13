@@ -28,6 +28,7 @@ class ResponseProcessor
     /** @var array */
     private $jsonContentTypes = [
         'application/json',
+        'application/json; charset=UTF-8',
     ];
 
     /**
@@ -102,7 +103,12 @@ class ResponseProcessor
     private function getBodyAsArray(ResponseInterface $response)
     {
         if ($this->responseContentTypeIsJson($response)) {
-            $body = $response->getBody()->rewind();
+            $response->getBody()->rewind();
+            $body = null;
+
+            if ($response->getBody()->getSize() > 0) {
+                $body = $response->getBody()->getContents();
+            }
             $result = json_decode($body, true);
         } else {
             throw new \InvalidArgumentException('Response from Firebase Cloud Messaging is not a JSON');
