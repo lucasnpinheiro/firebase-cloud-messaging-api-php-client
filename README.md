@@ -14,22 +14,22 @@
 
 TODO
 
-[ ] Process response
-[ ] Dispatch events on different responses
-[ ] API for topic subscription
-[ ] API for device group subscription
-[ ] Exceptions
-[ ] More tests
-[ ] Describe features
-[ ] Documentation
+* [ ] Process response
+* [ ] Dispatch events on different responses
+* [ ] API for topic subscription
+* [ ] API for device group subscription
+* [ ] Exceptions
+* [ ] More tests
+* [ ] Describe features
+* [ ] Documentation
 
 ---
 
 Supported platforms:
 
-* Android
-* iOS
-* Chrome web browser
+* [x] Android
+* [x] iOS
+* [x] Chrome web browser
 
 Firebase Cloud Messaging is still developing and can be improved in the future.
 If you notice that in the current docs of FCM there are some new features introduced or some are deprecated,
