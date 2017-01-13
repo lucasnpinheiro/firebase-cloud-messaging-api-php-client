@@ -12,6 +12,7 @@ namespace Fresh\FirebaseCloudMessaging\Response;
 
 use Fresh\FirebaseCloudMessaging\Exception\FirebaseAuthenticationException;
 use Fresh\FirebaseCloudMessaging\Exception\FirebaseException;
+use Fresh\FirebaseCloudMessaging\Exception\FirebaseInternalServerErrorException;
 use Fresh\FirebaseCloudMessaging\Exception\FirebaseInvalidJsonException;
 use Fresh\FirebaseCloudMessaging\Exception\FirebaseUnsupportedResponseException;
 use Psr\Http\Message\ResponseInterface;
@@ -33,6 +34,8 @@ class ResponseProcessor
      * @param ResponseInterface $response
      *
      * @throws FirebaseException
+     *
+     * @return FirebaseResponseInterface
      */
     public function processResponse(ResponseInterface $response)
     {
@@ -43,7 +46,7 @@ class ResponseProcessor
         } elseif (Response::HTTP_UNAUTHORIZED === $response->getStatusCode()) {
             throw new FirebaseAuthenticationException();
         } elseif (Response::HTTP_INTERNAL_SERVER_ERROR === $response->getStatusCode()) {
-
+            throw new FirebaseInternalServerErrorException();
         } else {
             throw new FirebaseUnsupportedResponseException();
         }
@@ -51,29 +54,58 @@ class ResponseProcessor
         return $result;
     }
 
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return FirebaseResponseInterface
+     */
     private function processHttpOkResponse(ResponseInterface $response)
     {
         $body = $this->getBodyAsArray($response);
 
         if (isset($body['error'])) {
-            $this->processErrorOnHttpOkResponse($body);
+            $response = $this->processHttpOkResponseWithError($body);
         } else {
-
+            $response = $this->processHttpOkResponseWithoutError($body);
         }
+
+        return $response;
     }
 
-    private function processErrorOnHttpOkResponse(array $body)
+    /**
+     * @param array $body
+     *
+     * @return MulticastMessageResponse
+     */
+    private function processHttpOkResponseWithoutError(array $body)
     {
-
+        return (new MulticastMessageResponse())
+            ->setMulticastId($body['multicast_id'])
+            ->setNumberOfSuccessMessages($body['success'])
+            ->setNumberOfFailedMessages($body['failure'])
+            ->setNumberOfMessagesWithCanonicalRegistrationToken($body['canonical_ids'])
+            ->setResults($body['results']);
     }
 
+    private function processHttpOkResponseWithError(array $body)
+    {
+        // @todo finish it
+    }
+
+    /**
+     * @param ResponseInterface $response
+     *
+     * @throws \Exception
+     *
+     * @return mixed
+     */
     private function getBodyAsArray(ResponseInterface $response)
     {
-        if ($this->responseHasContentTypeJson($response)) {
+        if ($this->responseContentTypeIsJson($response)) {
             $body = $response->getBody()->rewind();
             $result = json_decode($body, true);
         } else {
-            throw new \Exception('Cannot decode response body');
+            throw new \InvalidArgumentException('Response from Firebase Cloud Messaging is not a JSON');
         }
 
         return $result;
@@ -84,7 +116,7 @@ class ResponseProcessor
      *
      * @return bool
      */
-    private function responseHasContentTypeJson(ResponseInterface $response)
+    private function responseContentTypeIsJson(ResponseInterface $response)
     {
         return $response->hasHeader('Content-Type') && in_array($response->getHeader('Content-Type')[0], $this->jsonContentTypes);
     }

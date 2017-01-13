@@ -10,13 +10,6 @@
 
 namespace Fresh\FirebaseCloudMessaging\Response;
 
-use Fresh\FirebaseCloudMessaging\Exception\FirebaseAuthenticationException;
-use Fresh\FirebaseCloudMessaging\Exception\FirebaseException;
-use Fresh\FirebaseCloudMessaging\Exception\FirebaseInvalidJsonException;
-use Fresh\FirebaseCloudMessaging\Exception\FirebaseUnsupportedResponseException;
-use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\HttpFoundation\Response;
-
 /**
  * Class FirebaseErrors.
  *

@@ -14,6 +14,7 @@
 
 TODO
 
+* [ ] Batch sending
 * [ ] Process response
 * [ ] Dispatch events on different responses
 * [ ] API for topic subscription

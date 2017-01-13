@@ -10,8 +10,12 @@
 
 namespace Fresh\FirebaseCloudMessaging;
 
+use Fresh\FirebaseCloudMessaging\Event\FirebaseEvents;
+use Fresh\FirebaseCloudMessaging\Event\MulticastMessageResponseEvent;
 use Fresh\FirebaseCloudMessaging\Message\Builder\MessageBuilder;
 use Fresh\FirebaseCloudMessaging\Message\Type\AbstractMessage;
+use Fresh\FirebaseCloudMessaging\Response\FirebaseResponseInterface;
+use Fresh\FirebaseCloudMessaging\Response\MulticastMessageResponse;
 use Fresh\FirebaseCloudMessaging\Response\ResponseProcessor;
 use GuzzleHttp\Client as GuzzleClient;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -86,6 +90,8 @@ class Client
 
     /**
      * @param AbstractMessage $message
+     *
+     * @return FirebaseResponseInterface
      */
     public function sendMessage(AbstractMessage $message)
     {
@@ -93,11 +99,41 @@ class Client
 
         $response = $this->guzzleHTTPClient->post(
             '',
-            [
-                'body' => $this->messageBuilder->getMessageAsJson(),
-            ]
+            ['body' => $this->messageBuilder->getMessageAsJson()]
         );
 
+        $this->dispatchEvent($message, $response);
+
         return $this->responseProcessor->processResponse($response);
+    }
+
+    /**
+     * @param AbstractMessage           $message
+     * @param FirebaseResponseInterface $response
+     */
+    private function dispatchEvent(AbstractMessage $message, FirebaseResponseInterface $response)
+    {
+        if ($this->allowedToDispatchEvents()) {
+            if ($response instanceof MulticastMessageResponse) {
+                $this->eventDispatcher->dispatch(
+                    FirebaseEvents::MULTICAST_MESSAGE_RESPONSE_EVENT,
+                    new MulticastMessageResponseEvent(
+                        $response->getMulticastId(),
+                        $response->getNumberOfSuccessMessages(),
+                        $response->getNumberOfFailedMessages(),
+                        $response->getNumberOfMessagesWithCanonicalRegistrationToken(),
+                        $response->getResults()
+                    )
+                );
+            }
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    private function allowedToDispatchEvents()
+    {
+        return $this->eventDispatcher instanceof EventDispatcherInterface;
     }
 }
