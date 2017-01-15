@@ -15,7 +15,7 @@ namespace Fresh\FirebaseCloudMessaging\Message\Part\Target;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class SingleRecipientTarget implements TargetInterface
+class SingleRecipientTarget implements TargetInterface, TokenTargetInterface
 {
     /** @var string */
     private $registrationToken = '';
@@ -38,5 +38,21 @@ class SingleRecipientTarget implements TargetInterface
     public function getRegistrationToken()
     {
         return $this->registrationToken;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSequentialSentTokens()
+    {
+        return (array) $this->getRegistrationToken();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNumberOfSequentialSentTokens()
+    {
+        return !empty($this->getRegistrationToken()) ? 1 : 0;
     }
 }

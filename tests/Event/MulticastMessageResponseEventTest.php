@@ -29,7 +29,7 @@ class MulticastMessageResponseEventTest extends \PHPUnit_Framework_TestCase
 
         $event = new MulticastMessageResponseEvent($multicastId, $success, $failure, $canonicalIds, $results);
         $this->assertSame($multicastId, $event->getMulticastId());
-        $this->assertSame($success, $event->getSuccessMessageResults());
+        $this->assertSame($success, $event->getSuccessfulMessageResults());
         $this->assertSame($failure, $event->getNumberOfFailedMessages());
         $this->assertSame($canonicalIds, $event->getNumberOfMessagesWithCanonicalRegistrationToken());
         $this->assertSame($results, $event->getResults());

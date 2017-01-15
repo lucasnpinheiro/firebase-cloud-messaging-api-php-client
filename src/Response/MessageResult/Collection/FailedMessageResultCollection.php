@@ -10,19 +10,19 @@
 
 namespace Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection;
 
-use Fresh\FirebaseCloudMessaging\Response\MessageResult\FailureMessageResult;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\FailedMessageResult;
 
 /**
- * Class FailureMessageResultCollection.
+ * Class FailedMessageResultCollection.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class FailureMessageResultCollection extends AbstractMessageResultCollection
+class FailedMessageResultCollection extends AbstractMessageResultCollection
 {
     /**
-     * @param FailureMessageResult $messageResult
+     * @param FailedMessageResult $messageResult
      */
-    public function addMessageResult(FailureMessageResult $messageResult)
+    public function addMessageResult(FailedMessageResult $messageResult)
     {
         $this->messageResults[] = $messageResult;
     }

@@ -8,13 +8,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Exception;
+namespace Fresh\FirebaseCloudMessaging\Message\Part\Target;
 
 /**
- * FirebaseException.
+ * TokenTargetInterface.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class FirebaseException extends \Exception implements FirebaseExceptionInterface
+interface TokenTargetInterface
 {
+    /**
+     * @return array
+     */
+    public function getSequentialSentTokens();
+
+    /**
+     * @return int
+     */
+    public function getNumberOfSequentialSentTokens();
 }

@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Exception;
+namespace Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection;
 
 /**
- * FirebaseException.
+ * AbstractMessageResultCollectionInterface.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class FirebaseException extends \Exception implements FirebaseExceptionInterface
+interface MessageResultCollectionInterface extends \Iterator, \Countable
 {
 }

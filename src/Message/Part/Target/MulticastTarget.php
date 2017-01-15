@@ -17,7 +17,7 @@ namespace Fresh\FirebaseCloudMessaging\Message\Part\Target;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class MulticastTarget implements TargetInterface
+class MulticastTarget implements TargetInterface, TokenTargetInterface
 {
     /** @var string[] */
     private $registrationTokens = [];
@@ -56,5 +56,21 @@ class MulticastTarget implements TargetInterface
     public function getRegistrationTokens()
     {
         return $this->registrationTokens;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSequentialSentTokens()
+    {
+        return $this->getRegistrationTokens();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNumberOfSequentialSentTokens()
+    {
+        return count($this->getRegistrationTokens());
     }
 }

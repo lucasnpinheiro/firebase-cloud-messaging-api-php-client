@@ -10,59 +10,18 @@
 
 namespace Fresh\FirebaseCloudMessaging\Response;
 
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection\CanonicalTokenMessageResultCollection;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection\FailedMessageResultCollection;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection\SuccessfulMessageResultCollection;
+
 /**
  * MulticastMessageResponse.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class MulticastMessageResponse implements FirebaseResponseInterface
+class MulticastMessageResponse implements MulticastMessageResponseInterface
 {
-    /**
-     * Unique ID (number) identifying the multicast message.
-     *
-     * @var int
-     */
-    private $multicastId;
-
-    /**
-     * Number of messages that were processed without an error.
-     *
-     * @var int
-     */
-    private $numberOfSuccessMessages;
-
-    /**
-     * Number of messages that could not be processed.
-     *
-     * @var int
-     */
-    private $numberOfFailedMessages;
-
-    /**
-     * Number of results that contain a canonical registration token.
-     * A canonical registration ID is the registration token of the last registration requested by the client app.
-     * This is the ID that the server should use when sending messages to the device.
-     *
-     * @var int
-     */
-    private $numberOfMessagesWithCanonicalRegistrationToken;
-
-    /**
-     * Array of objects representing the status of the messages processed.
-     * The objects are listed in the same order as the request
-     * (i.e., for each registration ID in the request, its result is listed in the same index in the response).
-     *
-     * @var array
-     */
-    private $results;
-
-    /**
-     * @return int
-     */
-    public function getMulticastId()
-    {
-        return $this->multicastId;
-    }
+    use MulticastMessageResponseTrait;
 
     /**
      * @param int $multicastId
@@ -77,81 +36,37 @@ class MulticastMessageResponse implements FirebaseResponseInterface
     }
 
     /**
-     * @return int
-     */
-    public function getNumberOfSuccessMessages()
-    {
-        return $this->numberOfSuccessMessages;
-    }
-
-    /**
-     * @param int $numberOfSuccessMessages
+     * @param SuccessfulMessageResultCollection $successfulMessageResults
      *
      * @return $this
      */
-    public function setNumberOfSuccessMessages($numberOfSuccessMessages)
+    public function setSuccessfulMessageResults(SuccessfulMessageResultCollection $successfulMessageResults)
     {
-        $this->numberOfSuccessMessages = $numberOfSuccessMessages;
+        $this->successfulMessageResults = $successfulMessageResults;
 
         return $this;
     }
 
     /**
-     * @return int
-     */
-    public function getNumberOfFailedMessages()
-    {
-        return $this->numberOfFailedMessages;
-    }
-
-    /**
-     * @param int $numberOfFailedMessages
+     * @param FailedMessageResultCollection $failedMessageResults
      *
      * @return $this
      */
-    public function setNumberOfFailedMessages($numberOfFailedMessages)
+    public function setFailedMessageResults(FailedMessageResultCollection $failedMessageResults)
     {
-        $this->numberOfFailedMessages = $numberOfFailedMessages;
+        $this->failedMessageResults = $failedMessageResults;
 
         return $this;
     }
 
     /**
-     * @return int
-     */
-    public function getNumberOfMessagesWithCanonicalRegistrationToken()
-    {
-        return $this->numberOfMessagesWithCanonicalRegistrationToken;
-    }
-
-    /**
-     * @param int $numberOfMessagesWithCanonicalRegistrationToken
+     * @param CanonicalTokenMessageResultCollection $canonicalTokenMessageResults
      *
      * @return $this
      */
-    public function setNumberOfMessagesWithCanonicalRegistrationToken($numberOfMessagesWithCanonicalRegistrationToken)
+    public function setCanonicalTokenMessageResults(CanonicalTokenMessageResultCollection $canonicalTokenMessageResults)
     {
-        $this->numberOfMessagesWithCanonicalRegistrationToken = $numberOfMessagesWithCanonicalRegistrationToken;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getResults()
-    {
-        return $this->results;
-    }
-
-    /**
-     * @param array $results
-     *
-     * @return $this
-     */
-    public function setResults(array $results)
-    {
-        $this->results = $results;
+        $this->canonicalTokenMessageResults = $canonicalTokenMessageResults;
 
         return $this;
     }

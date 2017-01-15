@@ -18,7 +18,6 @@ use Fresh\FirebaseCloudMessaging\Response\FirebaseResponseInterface;
 use Fresh\FirebaseCloudMessaging\Response\MulticastMessageResponse;
 use Fresh\FirebaseCloudMessaging\Response\ResponseProcessor;
 use GuzzleHttp\Client as GuzzleClient;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Client.
@@ -103,7 +102,7 @@ class Client
             ['body' => $this->messageBuilder->getMessageAsJson()]
         );
 
-        $processedResponse = $this->responseProcessor->processResponse($response);
+        $processedResponse = $this->responseProcessor->processResponse($message, $response);
         $this->dispatchEvent($message, $processedResponse);
 
         return $processedResponse;

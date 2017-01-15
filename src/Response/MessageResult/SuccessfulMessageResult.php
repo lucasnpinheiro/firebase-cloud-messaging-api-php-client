@@ -11,21 +11,10 @@
 namespace Fresh\FirebaseCloudMessaging\Response\MessageResult;
 
 /**
- * SuccessMessageResultInterface.
+ * Class SuccessfulMessageResult.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-interface SuccessMessageResultInterface extends MessageResultInterface
+class SuccessfulMessageResult extends AbstractSuccessfulMessageResult
 {
-    /**
-     * @return string
-     */
-    public function getMessageId();
-
-    /**
-     * @param string $messageId
-     *
-     * @return $this
-     */
-    public function setMessageId($messageId);
 }

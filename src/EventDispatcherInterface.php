@@ -8,24 +8,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Fresh\FirebaseCloudMessaging\Response\MessageResult;
+namespace Fresh\FirebaseCloudMessaging;
 
 /**
- * FailureMessageResultInterface.
+ * EventDispatcherInterface.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-interface FailureMessageResultInterface extends MessageResultInterface
+interface EventDispatcherInterface
 {
     /**
-     * @return string
+     * @param string $eventName
+     * @param mixed  $eventData
      */
-    public function getError();
-
-    /**
-     * @param string $error
-     *
-     * @return $this
-     */
-    public function setError($error);
+    public function dispatch($eventName, $eventData);
 }

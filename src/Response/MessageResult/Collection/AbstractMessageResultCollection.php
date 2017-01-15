@@ -15,7 +15,7 @@ namespace Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-abstract class AbstractMessageResultCollection implements \Iterator
+abstract class AbstractMessageResultCollection implements MessageResultCollectionInterface
 {
     /** @var array */
     protected $messageResults;
@@ -60,5 +60,13 @@ abstract class AbstractMessageResultCollection implements \Iterator
     public function rewind()
     {
         reset($this->messageResults);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return count($this->messageResults);
     }
 }

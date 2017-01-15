@@ -11,29 +11,29 @@
 namespace Fresh\FirebaseCloudMessaging\Response\MessageResult;
 
 /**
- * Class FailureMessageResult.
+ * AbstractSuccessfulMessageResult.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class FailureMessageResult extends AbstractMessageResult implements FailureMessageResultInterface
+abstract class AbstractSuccessfulMessageResult extends AbstractMessageResult implements SuccessfulMessageResultInterface
 {
     /** @var string */
-    private $error;
+    private $messageId = '';
 
     /**
      * {@inheritdoc}
      */
-    public function getError()
+    public function getMessageId()
     {
-        return $this->error;
+        return $this->messageId;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setError($error)
+    public function setMessageId($messageId)
     {
-        $this->error = $error;
+        $this->messageId = $messageId;
 
         return $this;
     }

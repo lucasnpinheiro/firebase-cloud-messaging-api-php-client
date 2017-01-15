@@ -11,10 +11,18 @@
 namespace Fresh\FirebaseCloudMessaging\Response;
 
 use Fresh\FirebaseCloudMessaging\Exception\FirebaseAuthenticationException;
-use Fresh\FirebaseCloudMessaging\Exception\FirebaseException;
+use Fresh\FirebaseCloudMessaging\Exception\FirebaseExceptionInterface;
 use Fresh\FirebaseCloudMessaging\Exception\FirebaseInternalServerErrorException;
 use Fresh\FirebaseCloudMessaging\Exception\FirebaseInvalidJsonException;
 use Fresh\FirebaseCloudMessaging\Exception\FirebaseUnsupportedResponseException;
+use Fresh\FirebaseCloudMessaging\Message\Part\Target\TokenTargetInterface;
+use Fresh\FirebaseCloudMessaging\Message\Type\AbstractMessage;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\CanonicalTokenMessageResult;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection\CanonicalTokenMessageResultCollection;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection\FailedMessageResultCollection;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection\SuccessfulMessageResultCollection;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\FailedMessageResult;
+use Fresh\FirebaseCloudMessaging\Response\MessageResult\SuccessfulMessageResult;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,15 +39,21 @@ class ResponseProcessor
         'application/json; charset=UTF-8',
     ];
 
+    /** @var AbstractMessage */
+    private $message;
+
     /**
+     * @param AbstractMessage   $message
      * @param ResponseInterface $response
      *
-     * @throws FirebaseException
+     * @throws FirebaseExceptionInterface
      *
      * @return FirebaseResponseInterface
      */
-    public function processResponse(ResponseInterface $response)
+    public function processResponse(AbstractMessage $message, ResponseInterface $response)
     {
+        $this->message = $message;
+
         if (Response::HTTP_OK === $response->getStatusCode()) {
             $result = $this->processHttpOkResponse($response);
         } elseif (Response::HTTP_BAD_REQUEST === $response->getStatusCode()) {
@@ -80,12 +94,45 @@ class ResponseProcessor
      */
     private function processHttpOkResponseWithoutError(array $body)
     {
+        $successfulMessageResults = new SuccessfulMessageResultCollection();
+        $failedMessageResults = new FailedMessageResultCollection();
+        $canonicalTokenMessageResults = new CanonicalTokenMessageResultCollection();
+
+        if ($this->message instanceof TokenTargetInterface) {
+            if (isset($body['results']) && $this->message->getNumberOfSequentialSentTokens() !== count($body['results'])) {
+                throw new \Exception('Mismatch number of sent tokens and results');
+            }
+
+            for ($i = 0; $i < $this->message->getNumberOfSequentialSentTokens(); $i++) {
+                $currentToken = $this->message->getSequentialSentTokens()[$i];
+                $currentResult = $body['results'][$i];
+
+                if (isset($currentResult['error'])) {
+                    $messageResult = (new FailedMessageResult())
+                        ->setError($currentResult['error']);
+
+                    $failedMessageResults->addMessageResult($messageResult);
+                } elseif (isset($currentResult['registration_id'])) {
+                    $messageResult = (new CanonicalTokenMessageResult())
+                        ->setCanonicalToken($currentResult['registration_id']);
+
+                    $canonicalTokenMessageResults->addMessageResult($messageResult);
+                } else {
+                    $messageResult = new SuccessfulMessageResult();
+
+                    $successfulMessageResults->addMessageResult($messageResult);
+                }
+
+                $messageResult->setToken($currentToken)
+                        ->setMessageId($currentResult['message_id']);
+            }
+        }
+
         return (new MulticastMessageResponse())
             ->setMulticastId($body['multicast_id'])
-            ->setNumberOfSuccessMessages($body['success'])
-            ->setNumberOfFailedMessages($body['failure'])
-            ->setNumberOfMessagesWithCanonicalRegistrationToken($body['canonical_ids'])
-            ->setResults($body['results']);
+            ->setSuccessfulMessageResults($successfulMessageResults)
+            ->setFailedMessageResults($failedMessageResults)
+            ->setCanonicalTokenMessageResults($canonicalTokenMessageResults);
     }
 
     private function processHttpOkResponseWithError(array $body)
@@ -96,9 +143,9 @@ class ResponseProcessor
     /**
      * @param ResponseInterface $response
      *
-     * @throws \Exception
+     * @throws \InvalidArgumentException
      *
-     * @return mixed
+     * @return array
      */
     private function getBodyAsArray(ResponseInterface $response)
     {
