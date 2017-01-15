@@ -99,11 +99,13 @@ class ResponseProcessor
         $canonicalTokenMessageResults = new CanonicalTokenMessageResultCollection();
 
         if ($this->message instanceof TokenTargetInterface) {
-            if (isset($body['results']) && $this->message->getNumberOfSequentialSentTokens() !== count($body['results'])) {
+            $numberOfSequentialSentTokens = $this->message->getNumberOfSequentialSentTokens();
+
+            if (isset($body['results']) && $numberOfSequentialSentTokens !== count($body['results'])) {
                 throw new \Exception('Mismatch number of sent tokens and results');
             }
 
-            for ($i = 0; $i < $this->message->getNumberOfSequentialSentTokens(); $i++) {
+            for ($i = 0; $i < $numberOfSequentialSentTokens; $i++) {
                 $currentToken = $this->message->getSequentialSentTokens()[$i];
                 $currentResult = $body['results'][$i];
 
