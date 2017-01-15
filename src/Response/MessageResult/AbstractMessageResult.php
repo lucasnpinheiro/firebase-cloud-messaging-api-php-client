@@ -34,5 +34,7 @@ abstract class AbstractMessageResult implements MessageResultInterface
     public function setToken($token)
     {
         $this->token = $token;
+
+        return $this;
     }
 }

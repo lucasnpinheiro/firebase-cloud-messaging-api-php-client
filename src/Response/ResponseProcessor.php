@@ -98,15 +98,15 @@ class ResponseProcessor
         $failedMessageResults = new FailedMessageResultCollection();
         $canonicalTokenMessageResults = new CanonicalTokenMessageResultCollection();
 
-        if ($this->message instanceof TokenTargetInterface) {
-            $numberOfSequentialSentTokens = $this->message->getNumberOfSequentialSentTokens();
+        if ($this->message->getTarget() instanceof TokenTargetInterface) {
+            $numberOfSequentialSentTokens = $this->message->getTarget()->getNumberOfSequentialSentTokens();
 
             if (isset($body['results']) && $numberOfSequentialSentTokens !== count($body['results'])) {
                 throw new \Exception('Mismatch number of sent tokens and results');
             }
 
             for ($i = 0; $i < $numberOfSequentialSentTokens; $i++) {
-                $currentToken = $this->message->getSequentialSentTokens()[$i];
+                $currentToken = $this->message->getTarget()->getSequentialSentTokens()[$i];
                 $currentResult = $body['results'][$i];
 
                 if (isset($currentResult['error'])) {
@@ -126,7 +126,7 @@ class ResponseProcessor
                 }
 
                 $messageResult->setToken($currentToken)
-                        ->setMessageId($currentResult['message_id']);
+                              ->setMessageId($currentResult['message_id']);
             }
         }
 
@@ -173,6 +173,7 @@ class ResponseProcessor
      */
     private function responseContentTypeIsJson(ResponseInterface $response)
     {
-        return $response->hasHeader('Content-Type') && in_array($response->getHeader('Content-Type')[0], $this->jsonContentTypes);
+        return $response->hasHeader('Content-Type')
+               && in_array($response->getHeader('Content-Type')[0], $this->jsonContentTypes);
     }
 }

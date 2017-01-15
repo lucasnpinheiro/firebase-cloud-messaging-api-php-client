@@ -17,7 +17,6 @@ use Fresh\FirebaseCloudMessaging\Message\Type\AbstractMessage;
 use Fresh\FirebaseCloudMessaging\Response\FirebaseResponseInterface;
 use Fresh\FirebaseCloudMessaging\Response\MulticastMessageResponse;
 use Fresh\FirebaseCloudMessaging\Response\ResponseProcessor;
-use GuzzleHttp\Client as GuzzleClient;
 
 /**
  * Client.
@@ -26,23 +25,11 @@ use GuzzleHttp\Client as GuzzleClient;
  */
 class Client
 {
-    const DEFAULT_ENDPOINT = 'https://fcm.googleapis.com/fcm/send';
-    const DEFAULT_GUZZLE_TIMEOUT = 50;
-
-    /** @var string */
-    private $endpoint;
-
-    /** @var int */
-    private $messagingSenderId;
-
-    /** @var string */
-    private $serverKey;
-
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
     /** @var Client */
-    private $guzzleHTTPClient;
+    private $httpClient;
 
     /** @var MessageBuilder */
     private $messageBuilder;
@@ -50,34 +37,22 @@ class Client
     /** @var ResponseProcessor */
     private $responseProcessor;
 
+    /** @var bool */
+    private $allowedToDispatchEvents = false;
+
     /**
-     * @param int    $messagingSenderId
-     * @param string $serverKey
-     * @param string $endpoint
-     * @param int    $guzzleTimeOut
+     * @param HttpClient        $httpClient
+     * @param MessageBuilder    $messageBuilder
+     * @param ResponseProcessor $responseProcessor
      */
     public function __construct(
-        $messagingSenderId,
-        $serverKey,
-        $endpoint = self::DEFAULT_ENDPOINT,
-        $guzzleTimeOut = self::DEFAULT_GUZZLE_TIMEOUT
+        HttpClient $httpClient,
+        MessageBuilder $messageBuilder,
+        ResponseProcessor $responseProcessor
     ) {
-        $this->messagingSenderId = $messagingSenderId;
-        $this->serverKey = $serverKey;
-        $this->endpoint = $endpoint;
-
-        $this->messageBuilder = new MessageBuilder();
-        $this->responseProcessor = new ResponseProcessor();
-
-        $this->guzzleHTTPClient = new GuzzleClient([
-            'base_uri' => rtrim($this->endpoint, '/'),
-            'timeout' => $guzzleTimeOut,
-            'http_errors' => false,
-            'headers' => [
-                'Authorization' => sprintf('key=%s', $this->serverKey),
-                'Content-Type' => 'application/json',
-            ],
-        ]);
+        $this->messageBuilder = $messageBuilder;
+        $this->responseProcessor = $responseProcessor;
+        $this->httpClient = $httpClient;
     }
 
     /**
@@ -89,6 +64,14 @@ class Client
     }
 
     /**
+     * @param bool $allowedToDispatchEvents
+     */
+    public function setAllowedToDispatchEvents($allowedToDispatchEvents)
+    {
+        $this->allowedToDispatchEvents = $allowedToDispatchEvents;
+    }
+
+    /**
      * @param AbstractMessage $message
      *
      * @return FirebaseResponseInterface
@@ -97,22 +80,21 @@ class Client
     {
         $this->messageBuilder->setMessage($message);
 
-        $response = $this->guzzleHTTPClient->post(
+        $response = $this->httpClient->post(
             '',
             ['body' => $this->messageBuilder->getMessageAsJson()]
         );
 
         $processedResponse = $this->responseProcessor->processResponse($message, $response);
-        $this->dispatchEvent($message, $processedResponse);
+        $this->dispatchEvent($processedResponse);
 
         return $processedResponse;
     }
 
     /**
-     * @param AbstractMessage           $message
      * @param FirebaseResponseInterface $response
      */
-    private function dispatchEvent(AbstractMessage $message, FirebaseResponseInterface $response)
+    private function dispatchEvent(FirebaseResponseInterface $response)
     {
         if ($this->allowedToDispatchEvents()) {
             if ($response instanceof MulticastMessageResponse) {
@@ -120,9 +102,9 @@ class Client
                     FirebaseEvents::MULTICAST_MESSAGE_RESPONSE_EVENT,
                     new MulticastMessageResponseEvent(
                         $response->getMulticastId(),
-                        $response->getNumberOfSuccessMessages(),
-                        $response->getNumberOfFailedMessages(),
-                        $response->getNumberOfMessagesWithCanonicalRegistrationToken()
+                        $response->getSuccessfulMessageResults(),
+                        $response->getFailedMessageResults(),
+                        $response->getCanonicalTokenMessageResults()
                     )
                 );
             }
@@ -134,6 +116,6 @@ class Client
      */
     private function allowedToDispatchEvents()
     {
-        return $this->eventDispatcher instanceof EventDispatcherInterface;
+        return $this->eventDispatcher instanceof EventDispatcherInterface && $this->allowedToDispatchEvents;
     }
 }
