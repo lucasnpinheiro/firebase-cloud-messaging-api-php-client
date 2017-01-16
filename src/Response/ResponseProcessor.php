@@ -113,16 +113,15 @@ class ResponseProcessor
                     $messageResult = (new FailedMessageResult())
                         ->setError($currentResult['error']);
 
-                    $failedMessageResults->addMessageResult($messageResult);
+                    $failedMessageResults[] = $messageResult;
                 } elseif (isset($currentResult['registration_id'])) {
                     $messageResult = (new CanonicalTokenMessageResult())
                         ->setCanonicalToken($currentResult['registration_id']);
 
-                    $canonicalTokenMessageResults->addMessageResult($messageResult);
+                    $canonicalTokenMessageResults[] = $messageResult;
                 } else {
                     $messageResult = new SuccessfulMessageResult();
-
-                    $successfulMessageResults->addMessageResult($messageResult);
+                    $successfulMessageResults[] = $messageResult;
                 }
 
                 $messageResult->setToken($currentToken)

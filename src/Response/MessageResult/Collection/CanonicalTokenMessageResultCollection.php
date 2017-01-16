@@ -20,10 +20,10 @@ use Fresh\FirebaseCloudMessaging\Response\MessageResult\CanonicalTokenMessageRes
 class CanonicalTokenMessageResultCollection extends AbstractMessageResultCollection
 {
     /**
-     * @param CanonicalTokenMessageResult $messageResult
+     * {@inheritdoc}
      */
-    public function addMessageResult(CanonicalTokenMessageResult $messageResult)
+    public function getSupportedMessageResultType()
     {
-        $this->messageResults[] = $messageResult;
+        return CanonicalTokenMessageResult::class;
     }
 }

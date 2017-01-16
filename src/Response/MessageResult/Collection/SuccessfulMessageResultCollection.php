@@ -20,10 +20,10 @@ use Fresh\FirebaseCloudMessaging\Response\MessageResult\SuccessfulMessageResult;
 class SuccessfulMessageResultCollection extends AbstractMessageResultCollection
 {
     /**
-     * @param SuccessfulMessageResult $messageResult
+     * {@inheritdoc}
      */
-    public function addMessageResult(SuccessfulMessageResult $messageResult)
+    public function getSupportedMessageResultType()
     {
-        $this->messageResults[] = $messageResult;
+        return SuccessfulMessageResult::class;
     }
 }

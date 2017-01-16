@@ -11,10 +11,14 @@
 namespace Fresh\FirebaseCloudMessaging\Response\MessageResult\Collection;
 
 /**
- * AbstractMessageResultCollectionInterface.
+ * MessageResultCollectionInterface.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-interface MessageResultCollectionInterface extends \Iterator, \Countable
+interface MessageResultCollectionInterface extends \Iterator, \Countable, \ArrayAccess
 {
+    /**
+     * @return string
+     */
+    public function getSupportedMessageResultType();
 }

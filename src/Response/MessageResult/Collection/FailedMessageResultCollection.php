@@ -20,10 +20,10 @@ use Fresh\FirebaseCloudMessaging\Response\MessageResult\FailedMessageResult;
 class FailedMessageResultCollection extends AbstractMessageResultCollection
 {
     /**
-     * @param FailedMessageResult $messageResult
+     * {@inheritdoc}
      */
-    public function addMessageResult(FailedMessageResult $messageResult)
+    public function getSupportedMessageResultType()
     {
-        $this->messageResults[] = $messageResult;
+        return FailedMessageResult::class;
     }
 }
