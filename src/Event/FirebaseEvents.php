@@ -26,4 +26,11 @@ final class FirebaseEvents
      * @see \Fresh\FirebaseCloudMessaging\Event\TopicMessageResponseEvent
      */
     const TOPIC_MESSAGE_RESPONSE_EVENT = 'firebase.topic_message_response';
+
+    /**
+     * Constructor.
+     */
+    private function __construct()
+    {
+    }
 }

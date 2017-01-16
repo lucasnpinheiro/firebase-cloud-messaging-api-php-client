@@ -29,4 +29,11 @@ final class FirebaseErrors
     const INTERVAL_SERVER_ERROR = 'InternalServerError';
     const DEVICE_MESSAGE_RATE_EXCEEDED = 'DeviceMessageRateExceeded';
     const TOPICS_MESSAGE_RATE_EXCEEDED = 'TopicsMessageRateExceeded';
+
+    /**
+     * Constructor.
+     */
+    private function __construct()
+    {
+    }
 }

@@ -18,7 +18,7 @@ use Fresh\FirebaseCloudMessaging\Response\ResponseProcessor;
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class ClientFactory
+final class ClientFactory
 {
     /** @var string */
     private $serverKey;
