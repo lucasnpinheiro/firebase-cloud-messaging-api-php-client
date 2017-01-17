@@ -11,10 +11,10 @@
 namespace Fresh\FirebaseCloudMessaging\Exception;
 
 /**
- * FirebaseUnsupportedResponseException.
+ * ExceptionInterface.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class FirebaseUnsupportedResponseException extends FirebaseException
+interface ExceptionInterface
 {
 }

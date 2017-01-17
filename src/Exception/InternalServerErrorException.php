@@ -11,10 +11,10 @@
 namespace Fresh\FirebaseCloudMessaging\Exception;
 
 /**
- * FirebaseAuthenticationException.
+ * InternalServerErrorException.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class FirebaseAuthenticationException extends FirebaseException
+class InternalServerErrorException extends \Exception implements ExceptionInterface
 {
 }

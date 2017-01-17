@@ -10,11 +10,11 @@
 
 namespace Fresh\FirebaseCloudMessaging\Response;
 
-use Fresh\FirebaseCloudMessaging\Exception\FirebaseAuthenticationException;
-use Fresh\FirebaseCloudMessaging\Exception\FirebaseExceptionInterface;
-use Fresh\FirebaseCloudMessaging\Exception\FirebaseInternalServerErrorException;
-use Fresh\FirebaseCloudMessaging\Exception\FirebaseInvalidJsonException;
-use Fresh\FirebaseCloudMessaging\Exception\FirebaseUnsupportedResponseException;
+use Fresh\FirebaseCloudMessaging\Exception\AuthenticationException;
+use Fresh\FirebaseCloudMessaging\Exception\ExceptionInterface;
+use Fresh\FirebaseCloudMessaging\Exception\InternalServerErrorException;
+use Fresh\FirebaseCloudMessaging\Exception\InvalidJsonException;
+use Fresh\FirebaseCloudMessaging\Exception\UnsupportedResponseException;
 use Fresh\FirebaseCloudMessaging\Message\Part\Target\TokenTargetInterface;
 use Fresh\FirebaseCloudMessaging\Message\Type\AbstractMessage;
 use Fresh\FirebaseCloudMessaging\Response\MessageResult\CanonicalTokenMessageResult;
@@ -46,7 +46,7 @@ class ResponseProcessor
      * @param AbstractMessage   $message
      * @param ResponseInterface $response
      *
-     * @throws FirebaseExceptionInterface
+     * @throws ExceptionInterface
      *
      * @return FirebaseResponseInterface
      */
@@ -57,13 +57,13 @@ class ResponseProcessor
         if (Response::HTTP_OK === $response->getStatusCode()) {
             $result = $this->processHttpOkResponse($response);
         } elseif (Response::HTTP_BAD_REQUEST === $response->getStatusCode()) {
-            throw new FirebaseInvalidJsonException();
+            throw new InvalidJsonException();
         } elseif (Response::HTTP_UNAUTHORIZED === $response->getStatusCode()) {
-            throw new FirebaseAuthenticationException();
+            throw new AuthenticationException();
         } elseif (Response::HTTP_INTERNAL_SERVER_ERROR === $response->getStatusCode()) {
-            throw new FirebaseInternalServerErrorException();
+            throw new InternalServerErrorException();
         } else {
-            throw new FirebaseUnsupportedResponseException();
+            throw new UnsupportedResponseException();
         }
 
         return $result;

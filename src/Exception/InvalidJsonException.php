@@ -11,10 +11,10 @@
 namespace Fresh\FirebaseCloudMessaging\Exception;
 
 /**
- * FirebaseException.
+ * InvalidJsonException.
  *
  * @author Artem Genvald <genvaldartem@gmail.com>
  */
-class FirebaseException extends \Exception implements FirebaseExceptionInterface
+class InvalidJsonException extends \Exception implements ExceptionInterface
 {
 }
